@@ -13,23 +13,23 @@
                 </tr>
 
                 <?php
-                    if (!empty($log->log)) {
-                        $i = 0;
-                        foreach ($log->log as $log) {
-                            ?>
+                if (!empty($log->log)) {
+                    $i = 0;
+                    foreach ($log->log as $log) {
+                        ?>
                     <tr<?php echo $this->Html->concat(' ', ($i % 2 == 1) ? ' class="odd_row"' : '', ''); ?>>
                         <td><?php $this->Html->_($log->date); ?></td>
                         <td>
                             <?php
-                                if ($log->type == 'WARNING') {
-                                    $status_class = 'warning';
-                                } elseif ($log->type == 'INFO') {
-                                    $status_class = 'info';
-                                } elseif ($log->type == 'DANGER') {
-                                    $status_class = 'danger';
-                                } else {
-                                    $status_class = 'success';
-                                } ?>
+                            if ($log->type == 'WARNING') {
+                                $status_class = 'warning';
+                            } elseif ($log->type == 'INFO') {
+                                $status_class = 'info';
+                            } elseif ($log->type == 'DANGER') {
+                                $status_class = 'danger';
+                            } else {
+                                $status_class = 'success';
+                            } ?>
                             <span class="label label-<?php $this->Html->_($status_class); ?>">
                                 <?php $this->_('Teamspeak.tab_logs.type_' . $this->Html->_($log->type, true)); ?>
                             </span>
@@ -39,15 +39,15 @@
                         <td><?php $this->Html->_($log->description); ?></td>
                     </tr>
                 <?php
-                            $i++;
-                        }
-                    } else {
-                        ?>
+                        $i++;
+                    }
+                } else {
+                ?>
                     <tr>
                         <td colspan="5"><?php $this->_('Teamspeak.tab_logs.text_no_logs'); ?></td>
                     </tr>
                 <?php
-                    }
+                }
                 ?>
             </tbody>
         </table>

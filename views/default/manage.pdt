@@ -35,8 +35,8 @@
                     <a href="<?php echo $this->Html->safe($this->base_uri . 'settings/company/modules/editrow/' . $this->Html->ifSet($module->id) . '/' . $this->Html->ifSet($module->rows[$i]->id) . '/'); ?>"><?php $this->_('Teamspeak.manage.module_rows.edit'); ?></a>
                     <?php
                     $this->Form->create($this->base_uri . 'settings/company/modules/deleterow/');
-                $this->Form->fieldHidden('id', $this->Html->ifSet($module->id));
-                $this->Form->fieldHidden('row_id', $this->Html->ifSet($module->rows[$i]->id)); ?>
+                    $this->Form->fieldHidden('id', $this->Html->ifSet($module->id));
+                    $this->Form->fieldHidden('row_id', $this->Html->ifSet($module->rows[$i]->id)); ?>
                     <a href="<?php echo $this->Html->safe($this->base_uri . 'settings/company/modules/deleterow/' . $this->Html->ifSet($module->id) . '/' . $this->Html->ifSet($module->rows[$i]->id) . '/'); ?>" class="manage" rel="<?php echo $this->Html->safe($this->_('Teamspeak.manage.module_rows.confirm_delete', true)); ?>"><?php $this->_('Teamspeak.manage.module_rows.delete'); ?></a>
                     <?php
                     $this->Form->end(); ?>
@@ -80,8 +80,8 @@
                     <a href="<?php echo $this->Html->safe($this->base_uri . 'settings/company/modules/editgroup/' . $this->Html->ifSet($module->id) . '/' . $this->Html->ifSet($module->groups[$i]->id) . '/'); ?>"><?php $this->_('Teamspeak.manage.module_groups.edit'); ?></a>
                     <?php
                     $this->Form->create($this->base_uri . 'settings/company/modules/deletegroup/');
-                $this->Form->fieldHidden('id', $this->Html->ifSet($module->id));
-                $this->Form->fieldHidden('group_id', $this->Html->ifSet($module->groups[$i]->id)); ?>
+                    $this->Form->fieldHidden('id', $this->Html->ifSet($module->id));
+                    $this->Form->fieldHidden('group_id', $this->Html->ifSet($module->groups[$i]->id)); ?>
                     <a href="<?php echo $this->Html->safe($this->base_uri . 'settings/company/modules/deletegroup/' . $this->Html->ifSet($module->id) . '/' . $this->Html->ifSet($module->groups[$i]->id) . '/'); ?>" class="manage" rel="<?php echo $this->Html->safe($this->_('Teamspeak.manage.module_groups.confirm_delete', true)); ?>"><?php $this->_('Teamspeak.manage.module_groups.delete'); ?></a>
                     <?php
                     $this->Form->end(); ?>

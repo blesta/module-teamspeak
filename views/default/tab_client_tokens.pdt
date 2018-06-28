@@ -12,9 +12,9 @@
             </thead>
             <tbody>
             <?php
-                if (!empty($tokens->tokens)) {
-                    foreach ($tokens->tokens as $token) {
-                        $date = date('M d, Y', $token->token_created); ?>
+            if (!empty($tokens->tokens)) {
+                foreach ($tokens->tokens as $token) {
+                    $date = date('M d, Y', $token->token_created); ?>
                 <tr>
                     <td><?php $this->Html->_($date); ?></td>
                     <td><?php $this->Html->_($token->token); ?></td>
@@ -32,14 +32,14 @@
                     </td>
                 </tr>
             <?php
-                    }
-                } else {
-                    ?>
+                }
+            } else {
+            ?>
                 <tr>
                     <td colspan="4"><?php $this->_('Teamspeak.tab_client_tokens.text_no_tokens'); ?></td>
                 </tr>
             <?php
-                }
+            }
             ?>
             </tbody>
         </table>
@@ -65,13 +65,13 @@
             <div class="form-group">
                 <?php
                     $this->Form->label($this->_('Teamspeak.tab_client_tokens.field_sgid', true), 'sgid');
-                    $this->Form->fieldSelect('sgid', $server_groups_options, $this->Html->ifSet($vars->sgid), ['id' => 'sgid', 'class'=>'form-control']);
+                    $this->Form->fieldSelect('sgid', $server_groups_options, $this->Html->ifSet($vars->sgid), ['id' => 'sgid', 'class' => 'form-control']);
                 ?>
             </div>
             <div class="form-group">
                 <?php
                     $this->Form->label($this->_('Teamspeak.tab_client_tokens.field_description', true), 'description');
-                    $this->Form->fieldText('description', $this->Html->ifSet($vars->token), ['id' => 'description', 'class'=>'form-control', 'placeholder' => $this->_('Teamspeak.tab_client_tokens.field_description', true)]);
+                    $this->Form->fieldText('description', $this->Html->ifSet($vars->token), ['id' => 'description', 'class' => 'form-control', 'placeholder' => $this->_('Teamspeak.tab_client_tokens.field_description', true)]);
                     $this->Form->fieldHidden('action', 'create_token');
                 ?>
             </div>

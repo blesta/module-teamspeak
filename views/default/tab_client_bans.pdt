@@ -13,10 +13,10 @@
             </thead>
             <tbody>
             <?php
-                if (!empty($server_bans->bans)) {
-                    foreach ($server_bans->bans as $ban) {
-                        $date = date('M d, Y', $ban->created);
-                        $rule = !empty($ban->ip) ? $ban->ip : $ban->lastnickname; ?>
+            if (!empty($server_bans->bans)) {
+                foreach ($server_bans->bans as $ban) {
+                    $date = date('M d, Y', $ban->created);
+                    $rule = !empty($ban->ip) ? $ban->ip : $ban->lastnickname; ?>
                 <tr>
                     <td><?php $this->Html->_($date); ?></td>
                     <td><?php $this->Html->_($ban->banid); ?></td>
@@ -24,25 +24,25 @@
                     <td><?php $this->Html->_($ban->reason); ?></td>
                     <td>
                         <?php
-                            $this->Form->create();
+                        $this->Form->create();
                         $this->Form->fieldHidden('action', 'unban_client');
                         $this->Form->fieldHidden('banid', $ban->banid); ?>
-                            <button class="btn btn-default btn-sm btn-success">
-                                <i class="fa fa-check"></i> <?php $this->_('Teamspeak.tab_client_bans.action_unban_client'); ?>
-                            </button>
+                        <button class="btn btn-default btn-sm btn-success">
+                            <i class="fa fa-check"></i> <?php $this->_('Teamspeak.tab_client_bans.action_unban_client'); ?>
+                        </button>
                         <?php
-                            $this->Form->end(); ?>
+                        $this->Form->end(); ?>
                     </td>
                 </tr>
             <?php
-                    }
-                } else {
-                    ?>
+                }
+            } else {
+            ?>
                 <tr>
                     <td colspan="5"><?php $this->_('Teamspeak.tab_client_bans.text_no_bans'); ?></td>
                 </tr>
             <?php
-                }
+            }
             ?>
             </tbody>
         </table>
@@ -68,13 +68,13 @@
             <div class="form-group">
                 <?php
                     $this->Form->label($this->_('Teamspeak.tab_client_bans.field_ip_address', true), 'ip_address');
-                    $this->Form->fieldText('ip_address', $this->Html->ifSet($vars->ip_address), ['id' => 'ip_address', 'class'=>'form-control', 'placeholder' => $this->_('Teamspeak.tab_client_bans.field_ip_address', true)]);
+                    $this->Form->fieldText('ip_address', $this->Html->ifSet($vars->ip_address), ['id' => 'ip_address', 'class' => 'form-control', 'placeholder' => $this->_('Teamspeak.tab_client_bans.field_ip_address', true)]);
                 ?>
             </div>
             <div class="form-group">
                 <?php
                     $this->Form->label($this->_('Teamspeak.tab_client_bans.field_reason', true), 'reason');
-                    $this->Form->fieldText('reason', $this->Html->ifSet($vars->reason), ['id' => 'reason', 'class'=>'form-control', 'placeholder' => $this->_('Teamspeak.tab_client_bans.field_reason', true)]);
+                    $this->Form->fieldText('reason', $this->Html->ifSet($vars->reason), ['id' => 'reason', 'class' => 'form-control', 'placeholder' => $this->_('Teamspeak.tab_client_bans.field_reason', true)]);
                     $this->Form->fieldHidden('action', 'create_ban');
                 ?>
             </div>

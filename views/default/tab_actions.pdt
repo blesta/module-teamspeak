@@ -4,13 +4,13 @@
     </div>
     <div class="pad">
         <?php
-            if ($server_info->state == 'online') {
-                $status_class = 'success';
-                $status = 'online';
-            } elseif ($server_info->state == 'offline') {
-                $status_class = 'danger';
-                $status = 'offline';
-            }
+        if ($server_info->state == 'online') {
+            $status_class = 'success';
+            $status = 'online';
+        } elseif ($server_info->state == 'offline') {
+            $status_class = 'danger';
+            $status = 'offline';
+        }
         ?>
 
         <span class="btn btn-sm btn-<?php $this->Html->_($status_class); ?>" style="padding: 2px 4px;" disabled="disabled">

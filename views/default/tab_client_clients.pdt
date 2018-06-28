@@ -11,9 +11,9 @@
             </thead>
             <tbody>
             <?php
-                if (!empty($server_clients->clients)) {
-                    foreach ($server_clients->clients as $client) {
-                        ?>
+            if (!empty($server_clients->clients)) {
+                foreach ($server_clients->clients as $client) {
+                    ?>
                 <tr>
                     <td><?php $this->Html->_($client->clid); ?></td>
                     <td><?php $this->Html->_($client->name); ?></td>
@@ -30,14 +30,14 @@
                     </td>
                 </tr>
             <?php
-                    }
-                } else {
-                    ?>
+                }
+            } else {
+            ?>
                 <tr>
                     <td colspan="3"><?php $this->_('Teamspeak.tab_client_clients.text_no_clients'); ?></td>
                 </tr>
             <?php
-                }
+            }
             ?>
             </tbody>
         </table>

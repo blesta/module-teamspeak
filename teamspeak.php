@@ -56,7 +56,9 @@ class Teamspeak extends Module
     {
         return [
             'tabClientActions' => ['name' => Language::_('Teamspeak.tab_client_actions', true), 'icon' => 'fa fa-cog'],
-            'tabClientClients' => ['name' => Language::_('Teamspeak.tab_client_clients', true), 'icon' => 'fa fa-users'],
+            'tabClientClients' => [
+                'name' => Language::_('Teamspeak.tab_client_clients', true), 'icon' => 'fa fa-users'
+            ],
             'tabClientBans' => ['name' => Language::_('Teamspeak.tab_client_bans', true), 'icon' => 'fa fa-ban'],
             'tabClientTokens' => ['name' => Language::_('Teamspeak.tab_client_tokens', true), 'icon' => 'fa fa-key'],
             'tabClientLogs' => ['name' => Language::_('Teamspeak.tab_client_logs', true), 'icon' => 'fa fa-bar-chart']
@@ -573,8 +575,13 @@ class Teamspeak extends Module
      * @see Module::getModule()
      * @see Module::getModuleRow()
      */
-    public function addService($package, array $vars = null, $parent_package = null, $parent_service = null, $status = 'pending')
-    {
+    public function addService(
+        $package,
+        array $vars = null,
+        $parent_package = null,
+        $parent_service = null,
+        $status = 'pending'
+    ) {
         $row = $this->getModuleRow();
 
         if (!$row) {
@@ -824,7 +831,12 @@ class Teamspeak extends Module
 
             $service_fields = $this->serviceFieldsToObject($service->fields);
 
-            $this->log($row->meta->hostname . '|serverdelete', serialize($service_fields->teamspeak_sid), 'input', true);
+            $this->log(
+                $row->meta->hostname . '|serverdelete',
+                serialize($service_fields->teamspeak_sid),
+                'input',
+                true
+            );
             $this->parseResponse($api->deleteServer($service_fields->teamspeak_sid));
 
             // Update the number of accounts on the server
@@ -853,8 +865,13 @@ class Teamspeak extends Module
      * @see Module::getModule()
      * @see Module::getModuleRow()
      */
-    public function changeServicePackage($package_from, $package_to, $service, $parent_package = null, $parent_service = null)
-    {
+    public function changeServicePackage(
+        $package_from,
+        $package_to,
+        $service,
+        $parent_package = null,
+        $parent_service = null
+    ) {
         $row = $this->getModuleRow();
 
         if ($row) {
@@ -985,7 +1002,10 @@ class Teamspeak extends Module
                 case 'change_name':
                     // Update the service name
                     Loader::loadModels($this, ['Services']);
-                    $this->Services->editField($service->id, ['key' => 'teamspeak_name', 'value' => $this->Html->ifSet($post['name'])]);
+                    $this->Services->editField(
+                        $service->id,
+                        ['key' => 'teamspeak_name', 'value' => $this->Html->ifSet($post['name'])]
+                    );
 
                     if (($errors = $this->Services->errors())) {
                         $this->Input->setErrors($errors);
@@ -1058,7 +1078,9 @@ class Teamspeak extends Module
         if (!empty($post)) {
             switch ($post['action']) {
                 case 'kick_client':
-                    $this->parseResponse($api->kickClient($service_fields->teamspeak_sid, $this->Html->ifSet($post['clid'])));
+                    $this->parseResponse(
+                        $api->kickClient($service_fields->teamspeak_sid, $this->Html->ifSet($post['clid']))
+                    );
                     break;
                 default:
                     break;
@@ -1114,10 +1136,18 @@ class Teamspeak extends Module
         if (!empty($post)) {
             switch ($post['action']) {
                 case 'unban_client':
-                    $this->parseResponse($api->deleteBan($service_fields->teamspeak_sid, $this->Html->ifSet($post['banid'])));
+                    $this->parseResponse(
+                        $api->deleteBan($service_fields->teamspeak_sid, $this->Html->ifSet($post['banid']))
+                    );
                     break;
                 case 'create_ban':
-                    $this->parseResponse($api->addBan($service_fields->teamspeak_sid, $this->Html->ifSet($post['ip_address']), $this->Html->ifSet($post['reason'])));
+                    $this->parseResponse(
+                        $api->addBan(
+                            $service_fields->teamspeak_sid,
+                            $this->Html->ifSet($post['ip_address']),
+                            $this->Html->ifSet($post['reason'])
+                        )
+                    );
                     break;
                 default:
                     break;
@@ -1173,10 +1203,18 @@ class Teamspeak extends Module
         if (!empty($post)) {
             switch ($post['action']) {
                 case 'create_token':
-                    $this->parseResponse($api->createPrivilegeKey($service_fields->teamspeak_sid, $this->Html->ifSet($post['sgid']), $this->Html->ifSet($post['description'])));
+                    $this->parseResponse(
+                        $api->createPrivilegeKey(
+                            $service_fields->teamspeak_sid,
+                            $this->Html->ifSet($post['sgid']),
+                            $this->Html->ifSet($post['description'])
+                        )
+                    );
                     break;
                 case 'delete_token':
-                    $this->parseResponse($api->deletePrivilegeKey($service_fields->teamspeak_sid, $this->Html->ifSet($post['token'])));
+                    $this->parseResponse(
+                        $api->deletePrivilegeKey($service_fields->teamspeak_sid, $this->Html->ifSet($post['token']))
+                    );
                     break;
                 default:
                     break;
@@ -1299,7 +1337,10 @@ class Teamspeak extends Module
                 case 'change_name':
                     // Update the service name
                     Loader::loadModels($this, ['Services']);
-                    $this->Services->editField($service->id, ['key' => 'teamspeak_name', 'value' => $this->Html->ifSet($post['name'])]);
+                    $this->Services->editField(
+                        $service->id,
+                        ['key' => 'teamspeak_name', 'value' => $this->Html->ifSet($post['name'])]
+                    );
 
                     if (($errors = $this->Services->errors())) {
                         $this->Input->setErrors($errors);
@@ -1372,7 +1413,9 @@ class Teamspeak extends Module
         if (!empty($post)) {
             switch ($post['action']) {
                 case 'kick_client':
-                    $this->parseResponse($api->kickClient($service_fields->teamspeak_sid, $this->Html->ifSet($post['clid'])));
+                    $this->parseResponse(
+                        $api->kickClient($service_fields->teamspeak_sid, $this->Html->ifSet($post['clid']))
+                    );
                     break;
                 default:
                     break;
@@ -1428,10 +1471,18 @@ class Teamspeak extends Module
         if (!empty($post)) {
             switch ($post['action']) {
                 case 'unban_client':
-                    $this->parseResponse($api->deleteBan($service_fields->teamspeak_sid, $this->Html->ifSet($post['banid'])));
+                    $this->parseResponse(
+                        $api->deleteBan($service_fields->teamspeak_sid, $this->Html->ifSet($post['banid']))
+                    );
                     break;
                 case 'create_ban':
-                    $this->parseResponse($api->addBan($service_fields->teamspeak_sid, $this->Html->ifSet($post['ip_address']), $this->Html->ifSet($post['reason'])));
+                    $this->parseResponse(
+                        $api->addBan(
+                            $service_fields->teamspeak_sid,
+                            $this->Html->ifSet($post['ip_address']),
+                            $this->Html->ifSet($post['reason'])
+                        )
+                    );
                     break;
                 default:
                     break;
@@ -1487,10 +1538,18 @@ class Teamspeak extends Module
         if (!empty($post)) {
             switch ($post['action']) {
                 case 'create_token':
-                    $this->parseResponse($api->createPrivilegeKey($service_fields->teamspeak_sid, $this->Html->ifSet($post['sgid']), $this->Html->ifSet($post['description'])));
+                    $this->parseResponse(
+                        $api->createPrivilegeKey(
+                            $service_fields->teamspeak_sid,
+                            $this->Html->ifSet($post['sgid']),
+                            $this->Html->ifSet($post['description'])
+                        )
+                    );
                     break;
                 case 'delete_token':
-                    $this->parseResponse($api->deletePrivilegeKey($service_fields->teamspeak_sid, $this->Html->ifSet($post['token'])));
+                    $this->parseResponse(
+                        $api->deletePrivilegeKey($service_fields->teamspeak_sid, $this->Html->ifSet($post['token']))
+                    );
                     break;
                 default:
                     break;

@@ -2,13 +2,13 @@
     <h4><?php $this->_('Teamspeak.tab_client_actions.heading_status'); ?></h4>
 
     <?php
-        if ($server_info->state == 'online') {
-            $status_class = 'success';
-            $status = 'online';
-        } elseif ($server_info->state == 'offline') {
-            $status_class = 'danger';
-            $status = 'offline';
-        }
+    if ($server_info->state == 'online') {
+        $status_class = 'success';
+        $status = 'online';
+    } elseif ($server_info->state == 'offline') {
+        $status_class = 'danger';
+        $status = 'offline';
+    }
     ?>
 
     <span class="label label-<?php $this->Html->_($status_class); ?>">
@@ -28,7 +28,7 @@
             <?php
                 $this->Form->end();
             ?>
-            
+
             <a href="#" class="name btn btn-default btn-block" style="margin-top: 5px;">
                 <i class="fa fa-edit"></i> <?php $this->_('Teamspeak.tab_client_actions.action_edit_name'); ?>
             </a>
@@ -94,7 +94,7 @@
             <div class="form-group">
                 <?php
                     $this->Form->label($this->_('Teamspeak.tab_client_actions.field_name', true), 'name');
-                    $this->Form->fieldText('name', $this->Html->ifSet($vars->name), ['id' => 'name', 'class'=>'form-control', 'placeholder' => $this->_('Teamspeak.tab_client_actions.field_name', true)]);
+                    $this->Form->fieldText('name', $this->Html->ifSet($vars->name), ['id' => 'name', 'class' => 'form-control', 'placeholder' => $this->_('Teamspeak.tab_client_actions.field_name', true)]);
                     $this->Form->fieldHidden('action', 'change_name');
                 ?>
             </div>
