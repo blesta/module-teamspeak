@@ -4,7 +4,7 @@
  *
  * @package blesta
  * @subpackage blesta.components.modules.teamspeak
- * @copyright Copyright (c) 2010, Phillips Data, Inc.
+ * @copyright Copyright (c) 2018, Phillips Data, Inc.
  * @license http://www.blesta.com/license/ The Blesta License Agreement
  * @link http://www.blesta.com/ Blesta
  */
@@ -603,6 +603,7 @@ class Teamspeak extends Module
         }
 
         // Only provision the service if 'use_module' is true
+        $result = null;
         if ($vars['use_module'] == 'true') {
             $this->log($row->meta->hostname . '|servercreate', serialize($params), 'input', true);
 
@@ -635,12 +636,12 @@ class Teamspeak extends Module
         return [
             [
                 'key' => 'teamspeak_sid',
-                'value' => $result->sid,
+                'value' => $result ? $result->sid : '',
                 'encrypted' => 0
             ],
             [
                 'key' => 'teamspeak_token',
-                'value' => $result->token,
+                'value' => $result ? $result->token : '',
                 'encrypted' => 1
             ],
             [
@@ -650,7 +651,7 @@ class Teamspeak extends Module
             ],
             [
                 'key' => 'teamspeak_port',
-                'value' => $result->virtualserver_port,
+                'value' => $result ? $result->virtualserver_port : '',
                 'encrypted' => 0
             ]
         ];
@@ -751,52 +752,6 @@ class Teamspeak extends Module
         }
 
         return $fields;
-    }
-
-    /**
-     * Suspends the service on the remote server. Sets Input errors on failure,
-     * preventing the service from being suspended.
-     *
-     * @param stdClass $package A stdClass object representing the current package
-     * @param stdClass $service A stdClass object representing the current service
-     * @param stdClass $parent_package A stdClass object representing the parent
-     *  service's selected package (if the current service is an addon service)
-     * @param stdClass $parent_service A stdClass object representing the parent
-     *  service of the service being suspended (if the current service is an addon service)
-     * @return mixed null to maintain the existing meta fields or a numerically
-     *  indexed array of meta fields to be stored for this service containing:
-     *  - key The key for this meta field
-     *  - value The value for this key
-     *  - encrypted Whether or not this field should be encrypted (default 0, not encrypted)
-     * @see Module::getModule()
-     * @see Module::getModuleRow()
-     */
-    public function suspendService($package, $service, $parent_package = null, $parent_service = null)
-    {
-        // Nothing to do
-    }
-
-    /**
-     * Unsuspends the service on the remote server. Sets Input errors on failure,
-     * preventing the service from being unsuspended.
-     *
-     * @param stdClass $package A stdClass object representing the current package
-     * @param stdClass $service A stdClass object representing the current service
-     * @param stdClass $parent_package A stdClass object representing the parent
-     *  service's selected package (if the current service is an addon service)
-     * @param stdClass $parent_service A stdClass object representing the parent
-     *  service of the service being unsuspended (if the current service is an addon service)
-     * @return mixed null to maintain the existing meta fields or a numerically
-     *  indexed array of meta fields to be stored for this service containing:
-     *  - key The key for this meta field
-     *  - value The value for this key
-     *  - encrypted Whether or not this field should be encrypted (default 0, not encrypted)
-     * @see Module::getModule()
-     * @see Module::getModuleRow()
-     */
-    public function unsuspendService($package, $service, $parent_package = null, $parent_service = null)
-    {
-        // Nothing to do
     }
 
     /**

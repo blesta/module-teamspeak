@@ -12,7 +12,6 @@ $lang['Teamspeak.tab_clients'] = 'Clients';
 $lang['Teamspeak.tab_bans'] = 'Bans';
 $lang['Teamspeak.tab_tokens'] = 'Tokens';
 $lang['Teamspeak.tab_logs'] = 'Logs';
-$lang['Teamspeak.tab_client_stats'] = 'Statistics';
 $lang['Teamspeak.tab_client_actions'] = 'Actions';
 $lang['Teamspeak.tab_client_clients'] = 'Clients';
 $lang['Teamspeak.tab_client_bans'] = 'Bans';

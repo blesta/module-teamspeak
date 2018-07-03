@@ -4,7 +4,7 @@
  *
  * @package blesta
  * @subpackage blesta.components.modules.teamspeak
- * @copyright Copyright (c) 2010, Phillips Data, Inc.
+ * @copyright Copyright (c) 2018, Phillips Data, Inc.
  * @license http://www.blesta.com/license/ The Blesta License Agreement
  * @link http://www.blesta.com/ Blesta
  */
@@ -33,12 +33,12 @@ class TeamspeakApi
     private $password;
 
     /**
-     * Initializes the class.
+     * Initializes the class
      *
-     * @param string $hostname The TeamSpeak server hostname.
-     * @param string $username The TeamSpeak server username.
-     * @param string $password The TeamSpeak server password.
-     * @param int $port The TeamSpeak server port.
+     * @param string $hostname The TeamSpeak server hostname
+     * @param string $username The TeamSpeak server username
+     * @param string $password The TeamSpeak server password
+     * @param int $port The TeamSpeak server port
      */
     public function __construct($hostname, $username, $password, $port = 10011)
     {
@@ -49,35 +49,34 @@ class TeamspeakApi
     }
 
     /**
-     * Initializes the TeamSpeak 3 Framework.
+     * Initializes the TeamSpeak 3 Framework
      *
-     * @param string $adapter Specifies the adapter method to invoke.
-     * @param array $options The options of the request.
-     * @param string $flags The flags of the request.
-     * @return TeamSpeak3_Node_Host The TeamSpeak Framework instance.
+     * @param string $adapter Specifies the adapter method to invoke
+     * @param array $options The options of the request
+     * @param string $flags The flags of the request
+     * @return TeamSpeak3_Node_Host The TeamSpeak Framework instance
      */
     public function apiRequest($adapter, array $options = [], $flags = null)
     {
         // Build uri request
         $query = (!empty($options) ? '&' . http_build_query($options) : null) . (!empty($flags) ? '#' . $flags : null);
-        $uri = $adapter . '://' . $this->username . ':' . $this->password . '@' . $this->hostname . ':' . $this->port . '/' . $query;
+        $uri = $adapter . '://' . $this->username . ':' . $this->password
+            . '@' . $this->hostname . ':' . $this->port . '/' . $query;
 
         // Initialize TeamSpeak 3 Framework
-        $framework = TeamSpeak3::factory($uri);
-
-        return $framework;
+        return TeamSpeak3::factory($uri);
     }
 
     /**
-     * Creates a new virtual server.
+     * Creates a new virtual server
      *
      * @param array $params An array contaning the following arguments:
-     *  - name: Specifies the name for the virtual server.
-     *  - maxclients: Specifies the maximum number of listeners that may simultaneously tune in to this stream.
-     *  - port: The port of the virtual server.
-     *  - url: The host button url.
-     *  - tooltip: The host button tooltip. (optional)
-     * @return stdClass An object containing the request response.
+     *  - name: Specifies the name for the virtual server
+     *  - maxclients: Specifies the maximum number of listeners that may simultaneously tune in to this stream
+     *  - port: The port of the virtual server
+     *  - url: The host button url
+     *  - tooltip: The host button tooltip (optional)
+     * @return stdClass An object containing the request response
      */
     public function createServer($params)
     {
@@ -94,12 +93,12 @@ class TeamspeakApi
             // Create the virtual server
             $result = $this->apiRequest('serverquery')->serverCreate($api_params);
 
-            // Add a control variable to know if the API request has been send successfully
+            // Add a control variable to know if the API request has been sent successfully
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
 
-            // Parse token to string
+            // Convert the token to a string
             if (isset($result['token'])) {
                 $result['token'] = (string) $result['token'];
             }
@@ -115,16 +114,16 @@ class TeamspeakApi
     }
 
     /**
-     * Edits an existing virtual server.
+     * Edits an existing virtual server
      *
-     * @param int $sid The virtual server id.
+     * @param int $sid The virtual server ID
      * @param array $params An array contaning the following arguments:
-     *  - name: Specifies the name for the virtual server.
-     *  - maxclients: Specifies the maximum number of listeners that may simultaneously tune in to this stream.
-     *  - port: The port of the virtual server.
-     *  - url: The host button url.
-     *  - tooltip: The host button tooltip. (optional)
-     * @return stdClass An object containing the request response.
+     *  - name: Specifies the name for the virtual server
+     *  - maxclients: Specifies the maximum number of listeners that may simultaneously tune in to this stream
+     *  - port: The port of the virtual server
+     *  - url: The host button url
+     *  - tooltip: The host button tooltip (optional)
+     * @return stdClass An object containing the request response
      */
     public function editServer($sid, $params)
     {
@@ -142,12 +141,12 @@ class TeamspeakApi
             $instance = $this->apiRequest('serverquery')->serverList()[$sid];
             $result = $instance->modify($api_params);
 
-            // Add a control variable to know if the API request has been send successfully
+            // Add a control variable to know if the API request has been sent successfully
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
 
-            // Parse token to string
+            // Convert the token to a string
             if (isset($result['token'])) {
                 $result['token'] = (string) $result['token'];
             }
@@ -163,10 +162,10 @@ class TeamspeakApi
     }
 
     /**
-     * Deletes an existing virtual server.
+     * Deletes an existing virtual server
      *
-     * @param int $sid The virtual server id.
-     * @return stdClass An object containing the request response.
+     * @param int $sid The virtual server ID
+     * @return stdClass An object containing the request response
      */
     public function deleteServer($sid)
     {
@@ -201,9 +200,9 @@ class TeamspeakApi
     }
 
     /**
-     * Get the instance of a virtual server.
+     * Get the instance of a virtual server
      *
-     * @param int $sid The virtual server id.
+     * @param int $sid The virtual server ID
      * @return stdClass An object containing the server instance
      */
     public function getServer($sid)
@@ -218,7 +217,7 @@ class TeamspeakApi
                 $result['instance'] = $instance;
             }
 
-            // Add a control variable to know if the API request has been send successfully
+            // Add a control variable to know if the API request has been sent successfully
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
@@ -234,7 +233,7 @@ class TeamspeakApi
     }
 
     /**
-     * List all the servers of the system.
+     * List all the servers of the system
      *
      * @return stdClass An object containing a list of the servers
      */
@@ -249,7 +248,7 @@ class TeamspeakApi
                 $result['servers'] = $servers;
             }
 
-            // Add a control variable to know if the API request has been send successfully
+            // Add a control variable to know if the API request has been sent successfully
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
@@ -265,9 +264,9 @@ class TeamspeakApi
     }
 
     /**
-     * Starts the virtual server.
+     * Starts the virtual server
      *
-     * @param int $sid The virtual server id.
+     * @param int $sid The virtual server ID
      * @return stdClass An object containing the response of the request
      */
     public function startServer($sid)
@@ -284,7 +283,7 @@ class TeamspeakApi
                 }
             }
 
-            // Add a control variable to know if the API request has been send successfully
+            // Add a control variable to know if the API request has been sent successfully
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
@@ -300,16 +299,16 @@ class TeamspeakApi
     }
 
     /**
-     * Restarts the virtual server.
+     * Restarts the virtual server
      *
-     * @param int $sid The virtual server id.
+     * @param int $sid The virtual server ID
      * @return stdClass An object containing the response of the request
      */
     public function restartServer($sid)
     {
         try {
             // Because TeamSpeak does not support the function of restarting a virtual
-            // server, we will manually stop and restart the virtual server.
+            // server, we will manually stop and restart the virtual server
             try {
                 $this->apiRequest('serverquery')->serverStop($sid);
                 $result = $this->apiRequest('serverquery')->serverStart($sid);
@@ -321,7 +320,7 @@ class TeamspeakApi
                 }
             }
 
-            // Add a control variable to know if the API request has been send successfully
+            // Add a control variable to know if the API request has been sent successfully
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
@@ -337,9 +336,9 @@ class TeamspeakApi
     }
 
     /**
-     * Stop the virtual server.
+     * Stop the virtual server
      *
-     * @param int $sid The virtual server id.
+     * @param int $sid The virtual server ID
      * @return stdClass An object containing the response of the request
      */
     public function stopServer($sid)
@@ -356,7 +355,7 @@ class TeamspeakApi
                 }
             }
 
-            // Add a control variable to know if the API request has been send successfully
+            // Add a control variable to know if the API request has been sent successfully
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
@@ -372,9 +371,9 @@ class TeamspeakApi
     }
 
     /**
-     * Get the state of a virtual server.
+     * Get the state of a virtual server
      *
-     * @param int $sid The virtual server id.
+     * @param int $sid The virtual server ID
      * @return stdClass An object containing the server state
      */
     public function getServerState($sid)
@@ -385,7 +384,7 @@ class TeamspeakApi
         // Check the state of the virtual server
         if (isset($server->error) && $server->code == !1033) {
             return $server;
-        } elseif (isset($server->error) && $server->code === 1033) {
+        } elseif (isset($server->error) && $server->code === 1033 || !isset($server->instance)) {
             $state = false;
         } else {
             $state = $server->instance->isOnline();
@@ -401,16 +400,16 @@ class TeamspeakApi
     }
 
     /**
-     * Get an existing server group.
+     * Get an existing server group
      *
-     * @param int $sid The virtual server id.
-     * @param int $sgid The server group id.
+     * @param int $sid The virtual server ID
+     * @param int $sgid The server group ID
      * @return stdClass An object containing the server group
      */
     public function getServerGroup($sid, $sgid)
     {
         try {
-            // Initializate the server instance
+            // Initialize the server instance
             $server = $this->getServer($sid);
 
             if (isset($server->instance) && $server->status) {
@@ -442,15 +441,15 @@ class TeamspeakApi
     }
 
     /**
-     * List all the server groups.
+     * List all the server groups
      *
-     * @param int $sid The virtual server id.
+     * @param int $sid The virtual server ID
      * @return stdClass An object containing the server groups
      */
     public function listServerGroups($sid)
     {
         try {
-            // Initializate the server instance
+            // Initialize the server instance
             $server = $this->getServer($sid);
 
             if (isset($server->instance) && $server->status) {
@@ -493,17 +492,17 @@ class TeamspeakApi
     }
 
     /**
-     * Creates a new token.
+     * Creates a new token
      *
-     * @param int $sid The virtual server id.
-     * @param int $sgid The server group id.
-     * @param string $description The token description.
+     * @param int $sid The virtual server ID
+     * @param int $sgid The server group ID
+     * @param string $description The token description
      * @return stdClass An object containing the new token
      */
     public function createPrivilegeKey($sid, $sgid, $description = null)
     {
         try {
-            // Initializate the server instance
+            // Initialize the server instance
             $server = $this->getServer($sid);
 
             if (isset($server->instance) && $server->status) {
@@ -532,10 +531,10 @@ class TeamspeakApi
     }
 
     /**
-     * Deletes an existing token.
+     * Deletes an existing token
      *
-     * @param int $sid The virtual server id.
-     * @param string $token The token.
+     * @param int $sid The virtual server ID
+     * @param string $token The token
      * @return stdClass An object containing the API response
      */
     public function deletePrivilegeKey($sid, $token)
@@ -569,15 +568,15 @@ class TeamspeakApi
     }
 
     /**
-     * List all the existing tokens.
+     * List all the existing tokens
      *
-     * @param int $sid The virtual server id.
+     * @param int $sid The virtual server ID
      * @return stdClass An object containing the tokens
      */
     public function listPrivilegeKeys($sid)
     {
         try {
-            // Initializate the server instance
+            // Initialize the server instance
             $server = $this->getServer($sid);
 
             if (isset($server->instance) && $server->status) {
@@ -612,16 +611,16 @@ class TeamspeakApi
     }
 
     /**
-     * Kick client.
+     * Kick client
      *
-     * @param int $sid The virtual server id.
-     * @param int $clid The client id.
+     * @param int $sid The virtual server ID
+     * @param int $clid The client ID
      * @return stdClass An object containing the API response
      */
     public function kickClient($sid, $clid)
     {
         try {
-            // Initializate the server instance
+            // Initialize the server instance
             $server = $this->getServer($sid);
 
             if (isset($server->instance) && $server->status) {
@@ -649,16 +648,16 @@ class TeamspeakApi
     }
 
     /**
-     * Get an existing client by their name.
+     * Get an existing client by their name
      *
-     * @param int $sid The virtual server id.
-     * @param string $name The client name.
+     * @param int $sid The virtual server ID
+     * @param string $name The client name
      * @return stdClass An object containing the requested client
      */
     public function getClientByName($sid, $name)
     {
         try {
-            // Initializate the server instance
+            // Initialize the server instance
             $server = $this->getServer($sid);
 
             if (isset($server->instance) && $server->status) {
@@ -690,15 +689,15 @@ class TeamspeakApi
     }
 
     /**
-     * List all the active clients.
+     * List all the active clients
      *
-     * @param int $sid The virtual server id.
+     * @param int $sid The virtual server ID
      * @return stdClass An object containing the active clients
      */
     public function listClients($sid)
     {
         try {
-            // Initializate the server instance
+            // Initialize the server instance
             $server = $this->getServer($sid);
 
             if (isset($server->instance) && $server->status) {
@@ -741,15 +740,15 @@ class TeamspeakApi
     }
 
     /**
-     * Reset the virtual server permissions.
+     * Reset the virtual server permissions
      *
-     * @param int $sid The virtual server id.
+     * @param int $sid The virtual server ID
      * @return stdClass An object containing the API response
      */
     public function resetPermissions($sid)
     {
         try {
-            // Initializate the server instance
+            // Initialize the server instance
             $server = $this->getServer($sid);
 
             if (isset($server->instance) && $server->status) {
@@ -778,16 +777,16 @@ class TeamspeakApi
     }
 
     /**
-     * Get the virtual server logs.
+     * Get the virtual server logs
      *
-     * @param int $sid The virtual server id.
+     * @param int $sid The virtual server ID
      * @param int $lines The maximum amount of lines to retreive.
      * @return stdClass An object containing the API response
      */
     public function getLog($sid, $lines = 30)
     {
         try {
-            // Initializate the server instance
+            // Initialize the server instance
             $server = $this->getServer($sid);
 
             if (isset($server->instance) && $server->status) {
@@ -832,17 +831,17 @@ class TeamspeakApi
     }
 
     /**
-     * Add a ban rule.
+     * Add a ban rule
      *
-     * @param int $sid The virtual server id.
-     * @param string $ip_address The IP address to ban.
-     * @param string $reason The reason of the ban.
+     * @param int $sid The virtual server ID
+     * @param string $ip_address The IP address to ban
+     * @param string $reason The reason of the ban
      * @return stdClass An object containing the API response
      */
     public function addBan($sid, $ip_address, $reason = null)
     {
         try {
-            // Initializate the server instance
+            // Initialize the server instance
             $server = $this->getServer($sid);
 
             if (isset($server->instance) && $server->status) {
@@ -871,16 +870,16 @@ class TeamspeakApi
     }
 
     /**
-     * Delete a ban rule.
+     * Delete a ban rule
      *
-     * @param int $sid The virtual server id.
-     * @param int $banid The ban rule id.
+     * @param int $sid The virtual server ID
+     * @param int $banid The ban rule ID
      * @return stdClass An object containing the API response
      */
     public function deleteBan($sid, $banid)
     {
         try {
-            // Initializate the server instance
+            // Initialize the server instance
             $server = $this->getServer($sid);
 
             if (isset($server->instance) && $server->status) {
@@ -908,15 +907,15 @@ class TeamspeakApi
     }
 
     /**
-     * Delete all the ban rules.
+     * Delete all the ban rules
      *
-     * @param int $sid The virtual server id.
+     * @param int $sid The virtual server ID
      * @return stdClass An object containing the API response
      */
     public function deleteAllBans($sid)
     {
         try {
-            // Initializate the server instance
+            // Initialize the server instance
             $server = $this->getServer($sid);
 
             if (isset($server->instance) && $server->status) {
@@ -944,15 +943,15 @@ class TeamspeakApi
     }
 
     /**
-     * List all the active ban rules.
+     * List all the active ban rules
      *
-     * @param int $sid The virtual server id.
+     * @param int $sid The virtual server ID
      * @return stdClass An object containing the ban rules
      */
     public function listBans($sid)
     {
         try {
-            // Initializate the server instance
+            // Initialize the server instance
             $server = $this->getServer($sid);
 
             if (isset($server->instance) && $server->status) {
