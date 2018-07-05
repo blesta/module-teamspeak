@@ -70,6 +70,10 @@ $lang['Teamspeak.service_field.port'] = 'Port';
 $lang['Teamspeak.service_field.sid'] = 'Virtual Server ID';
 
 // Service management
+$lang['Teamspeak.tab_actions.heading_status'] = 'Server Status';
+$lang['Teamspeak.tab_actions.status_online'] = 'Online';
+$lang['Teamspeak.tab_actions.status_offline'] = 'Offline';
+
 $lang['Teamspeak.tab_actions.status_title'] = 'Server Status';
 $lang['Teamspeak.tab_actions.server_title'] = 'Server Actions';
 $lang['Teamspeak.tab_actions.action_restart'] = 'Restart';
@@ -99,7 +103,6 @@ $lang['Teamspeak.tab_bans.bans_heading.ban_rule'] = 'Ban Rule';
 $lang['Teamspeak.tab_bans.bans_heading.reason'] = 'Reason';
 $lang['Teamspeak.tab_bans.bans_heading.options'] = 'Options';
 $lang['Teamspeak.tab_bans.action_unban_client'] = 'Unban Client';
-$lang['Teamspeak.tab_bans.action_ban'] = 'Create Ban';
 $lang['Teamspeak.tab_bans.text_no_bans'] = 'There are no ban rules yet.';
 
 $lang['Teamspeak.tab_bans.heading_create_ban'] = 'Create Ban';
@@ -114,7 +117,6 @@ $lang['Teamspeak.tab_tokens.tokens_heading.token'] = 'Token';
 $lang['Teamspeak.tab_tokens.tokens_heading.description'] = 'Description';
 $lang['Teamspeak.tab_tokens.tokens_heading.options'] = 'Options';
 $lang['Teamspeak.tab_tokens.action_delete_token'] = 'Delete';
-$lang['Teamspeak.tab_tokens.action_token'] = 'Create Token';
 $lang['Teamspeak.tab_tokens.text_no_tokens'] = 'There are no tokens yet.';
 
 $lang['Teamspeak.tab_tokens.heading_create_token'] = 'Create Token';

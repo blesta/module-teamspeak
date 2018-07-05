@@ -14,7 +14,7 @@
         ?>
 
         <span class="btn btn-sm btn-<?php $this->Html->_($status_class); ?>" style="padding: 2px 4px;" disabled="disabled">
-            <i class="fa fa-lightbulb-o"></i> <?php $this->_('Teamspeak.tab_client_actions.status_' . $this->Html->_($status, true)); ?>
+            <i class="fa fa-lightbulb-o"></i> <?php $this->_('Teamspeak.tab_actions.status_' . $this->Html->_($status, true)); ?>
         </span>
     </div>
 
@@ -40,7 +40,7 @@
                     $this->Form->fieldHidden('action', 'change_name');
                 ?>
                 <button class="name btn btn-default btn-block" style="margin-top: 5px;">
-                    <i class="fa fa-edit"></i> <?php $this->_('Teamspeak.tab_client_actions.action_edit_name'); ?>
+                    <i class="fa fa-edit"></i> <?php $this->_('Teamspeak.tab_actions.action_edit_name'); ?>
                 </button>
                 <?php
                     $this->Form->end();
@@ -63,7 +63,7 @@
                     $this->Form->fieldHidden('action', 'remove_ban');
                 ?>
                 <button class="btn btn-default btn-block" style="margin-top: 5px;">
-                    <i class="fa fa-ban"></i> <?php $this->_('Teamspeak.tab_client_actions.action_remove_ban'); ?>
+                    <i class="fa fa-ban"></i> <?php $this->_('Teamspeak.tab_actions.action_remove_ban'); ?>
                 </button>
                 <?php
                     $this->Form->end();
@@ -86,7 +86,7 @@
                     $this->Form->fieldHidden('action', 'reset_permissions');
                 ?>
                 <button class="btn btn-default btn-block" style="margin-top: 5px;">
-                    <i class="fa fa-refresh"></i> <?php $this->_('Teamspeak.tab_client_actions.action_reset_permissions'); ?>
+                    <i class="fa fa-refresh"></i> <?php $this->_('Teamspeak.tab_actions.action_reset_permissions'); ?>
                 </button>
                 <?php
                     $this->Form->end();
