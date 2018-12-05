@@ -312,6 +312,8 @@ class Teamspeak extends Module
 
         // Validate module row
         if ($this->Input->validates($vars)) {
+            $vars['hostname'] = strtolower($vars['hostname']);
+
             // Build the meta data for this row
             $meta = [];
             foreach ($vars as $key => $value) {
@@ -350,6 +352,8 @@ class Teamspeak extends Module
 
         // Validate module row
         if ($this->Input->validates($vars)) {
+            $vars['hostname'] = strtolower($vars['hostname']);
+
             // Build the meta data for this row
             $meta = [];
             foreach ($vars as $key => $value) {
@@ -1594,7 +1598,7 @@ class Teamspeak extends Module
 
         return $this->Input->matches(
             $host_name,
-            '/^([a-z0-9]|[a-z0-9][a-z0-9\-]{0,61}[a-z0-9])(\.([a-z0-9]|[a-z0-9][a-z0-9\-]{0,61}[a-z0-9]))+$/'
+            '/^([a-z0-9]|[a-z0-9][a-z0-9\-]{0,61}[a-z0-9])(\.([a-z0-9]|[a-z0-9][a-z0-9\-]{0,61}[a-z0-9]))+$/i'
         );
     }
 
