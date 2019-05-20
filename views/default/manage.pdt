@@ -14,7 +14,7 @@
             <h3><?php $this->_('Teamspeak.manage.module_rows_title'); ?></h3>
         </div>
         <?php
-        $num_rows = count($this->Html->ifSet($module->rows));
+        $num_rows = count($this->Html->ifSet($module->rows, []));
         if ($num_rows > 0) {
             ?>
         <table class="table">
@@ -61,7 +61,7 @@
             <h3><?php $this->_('Teamspeak.manage.module_groups_title'); ?></h3>
         </div>
         <?php
-        $num_rows = count($this->Html->ifSet($module->groups));
+        $num_rows = count($this->Html->ifSet($module->groups, []));
         if ($num_rows > 0) {
             ?>
         <table class="table">
@@ -75,7 +75,7 @@
                 ?>
             <tr<?php echo ($i % 2 == 1) ? ' class="odd_row"' : ''; ?>>
                 <td><?php $this->Html->_($module->groups[$i]->name); ?></td>
-                <td><?php echo count($this->Html->ifSet($module->groups[$i]->rows)); ?></td>
+                <td><?php echo count($this->Html->ifSet($module->groups[$i]->rows, [])); ?></td>
                 <td>
                     <a href="<?php echo $this->Html->safe($this->base_uri . 'settings/company/modules/editgroup/' . $this->Html->ifSet($module->id) . '/' . $this->Html->ifSet($module->groups[$i]->id) . '/'); ?>"><?php $this->_('Teamspeak.manage.module_groups.edit'); ?></a>
                     <?php
