@@ -385,8 +385,8 @@ class TeamspeakApi
             ];
 
             // Fetch the virtual server instance, and modify it
-            $instance = $this->apiRequest('serverquery')->serverList()[$sid];
-            $result = $instance->modify($api_params);
+            $server = $this->getServer($sid);
+            $result = $server->modify($api_params);
 
             // Stop the server instance
             $this->stopServer($sid);
@@ -421,8 +421,8 @@ class TeamspeakApi
             ];
 
             // Fetch the virtual server instance, and modify it
-            $instance = $this->apiRequest('serverquery')->serverList()[$sid];
-            $result = $instance->modify($api_params);
+            $server = $this->getServer($sid);
+            $result = $server->modify($api_params);
 
             // Start the server instance
             $this->startServer($sid);
