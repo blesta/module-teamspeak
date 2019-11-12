@@ -386,7 +386,10 @@ class TeamspeakApi
 
             // Fetch the virtual server instance, and modify it
             $server = $this->getServer($sid);
-            $result = $server->modify($api_params);
+
+            if (isset($server->instance)) {
+                $result = $server->instance->modify($api_params);
+            }
 
             // Stop the server instance
             $this->stopServer($sid);
@@ -420,12 +423,15 @@ class TeamspeakApi
                 'virtualserver_autostart' => 1
             ];
 
+            // Start the server first, before modify it
+            $this->startServer($sid);
+
             // Fetch the virtual server instance, and modify it
             $server = $this->getServer($sid);
-            $result = $server->modify($api_params);
 
-            // Start the server instance
-            $this->startServer($sid);
+            if (isset($server->instance)) {
+                $result = $server->instance->modify($api_params);
+            }
 
             // Add a control variable to know if the API request has been sent successfully
             if (empty($result['error'])) {
