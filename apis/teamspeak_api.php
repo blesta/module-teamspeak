@@ -371,6 +371,84 @@ class TeamspeakApi
     }
 
     /**
+     * Suspends an existing virtual server
+     *
+     * @param int $sid The virtual server ID
+     * @return stdClass An object containing the request response
+     */
+    public function suspendServer($sid)
+    {
+        try {
+            // Build the parameters array
+            $api_params = [
+                'virtualserver_autostart' => 0
+            ];
+
+            // Fetch the virtual server instance, and modify it
+            $server = $this->getServer($sid);
+
+            if (isset($server->instance)) {
+                $result = $server->instance->modify($api_params);
+            }
+
+            // Stop the server instance
+            $this->stopServer($sid);
+
+            // Add a control variable to know if the API request has been sent successfully
+            if (empty($result['error'])) {
+                $result['status'] = true;
+            }
+        } catch (Exception $e) {
+            $result = [
+                'error' => $e->getMessage(),
+                'status' => false,
+                'code' => $e->getCode()
+            ];
+        }
+
+        return (object) $result;
+    }
+
+    /**
+     * Unsuspends an existing virtual server
+     *
+     * @param int $sid The virtual server ID
+     * @return stdClass An object containing the request response
+     */
+    public function unsuspendServer($sid)
+    {
+        try {
+            // Build the parameters array
+            $api_params = [
+                'virtualserver_autostart' => 1
+            ];
+
+            // Start the server first, before modify it
+            $this->startServer($sid);
+
+            // Fetch the virtual server instance, and modify it
+            $server = $this->getServer($sid);
+
+            if (isset($server->instance)) {
+                $result = $server->instance->modify($api_params);
+            }
+
+            // Add a control variable to know if the API request has been sent successfully
+            if (empty($result['error'])) {
+                $result['status'] = true;
+            }
+        } catch (Exception $e) {
+            $result = [
+                'error' => $e->getMessage(),
+                'status' => false,
+                'code' => $e->getCode()
+            ];
+        }
+
+        return (object) $result;
+    }
+
+    /**
      * Get the state of a virtual server
      *
      * @param int $sid The virtual server ID
