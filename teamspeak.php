@@ -1,4 +1,5 @@
 <?php
+use Blesta\Core\Util\Validate\Server;
 /**
  * TeamSpeak Module.
  *
@@ -1863,7 +1864,10 @@ class Teamspeak extends Module
             ],
             'hostname' => [
                 'valid' => [
-                    'rule' => [[$this, 'validateHostName']],
+                    'rule' => function ($host_name) {
+                        $validator = new Server();
+                        return $validator->isDomain($host_name) || $validator->isIp($host_name);
+                    },
                     'message' => Language::_('Teamspeak.!error.host_name_valid', true)
                 ]
             ],
