@@ -4,6 +4,7 @@
  */
 // Basics
 $lang['Teamspeak.name'] = 'TeamSpeak';
+$lang['Teamspeak.description'] = 'TeamSpeak is a voice-over-Internet Protocol application for audio communication between users on a chat channel.';
 $lang['Teamspeak.module_row'] = 'Server';
 $lang['Teamspeak.module_row_plural'] = 'Servers';
 $lang['Teamspeak.module_group'] = 'Server Group';
