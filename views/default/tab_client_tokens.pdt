@@ -25,7 +25,7 @@
                         $this->Form->fieldHidden('action', 'delete_token');
                         $this->Form->fieldHidden('token', $token->token); ?>
                             <button class="btn btn-default btn-sm btn-danger">
-                                <i class="fa fa-trash"></i> <?php $this->_('Teamspeak.tab_client_tokens.action_delete_token'); ?>
+                                <i class="fas fa-trash"></i> <?php $this->_('Teamspeak.tab_client_tokens.action_delete_token'); ?>
                             </button>
                         <?php
                             $this->Form->end(); ?>
@@ -48,7 +48,7 @@
     <div class="row options">
         <div class="col-md-12">
             <a href="#" class="token btn btn-default pull-right" style="margin-top: 5px;">
-                <i class="fa fa-plus"></i> <?php $this->_('Teamspeak.tab_client_tokens.action_token'); ?>
+                <i class="fas fa-plus"></i> <?php $this->_('Teamspeak.tab_client_tokens.action_token'); ?>
             </a>
         </div>
     </div>
@@ -77,7 +77,7 @@
             </div>
         </div>
         <button class="btn btn-default pull-right">
-            <i class="fa fa-plus"></i> <?php $this->_('Teamspeak.tab_client_tokens.field_token_submit'); ?>
+            <i class="fas fa-plus"></i> <?php $this->_('Teamspeak.tab_client_tokens.field_token_submit'); ?>
         </button>
         <?php
             $this->Form->end();

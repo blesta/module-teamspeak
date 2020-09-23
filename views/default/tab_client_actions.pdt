@@ -12,7 +12,7 @@
     ?>
 
     <span class="label label-<?php $this->Html->_($status_class); ?>">
-        <i class="fa fa-lightbulb-o"></i> <?php $this->_('Teamspeak.tab_client_actions.status_' . $this->Html->_($status, true)); ?>
+        <i class="fas fa-lightbulb"></i> <?php $this->_('Teamspeak.tab_client_actions.status_' . $this->Html->_($status, true)); ?>
     </span>
 
     <h4><?php $this->_('Teamspeak.tab_client_actions.heading_actions'); ?></h4>
@@ -23,14 +23,14 @@
                 $this->Form->fieldHidden('action', 'restart');
             ?>
             <button<?php echo $this->Html->ifSet($status) != 'online' ? ' disabled="disabled"' : ''; ?> class="btn btn-default btn-block btn-success">
-                <i class="fa fa-refresh"></i> <?php $this->_('Teamspeak.tab_client_actions.action_restart'); ?>
+                <i class="fas fa-sync-alt"></i> <?php $this->_('Teamspeak.tab_client_actions.action_restart'); ?>
             </button>
             <?php
                 $this->Form->end();
             ?>
 
             <a href="#" class="name btn btn-default btn-block" style="margin-top: 5px;">
-                <i class="fa fa-edit"></i> <?php $this->_('Teamspeak.tab_client_actions.action_edit_name'); ?>
+                <i class="fas fa-edit"></i> <?php $this->_('Teamspeak.tab_client_actions.action_edit_name'); ?>
             </a>
         </div>
         <div class="col-md-4">
@@ -39,7 +39,7 @@
                 $this->Form->fieldHidden('action', 'stop');
             ?>
             <button<?php echo $this->Html->ifSet($status) != 'online' ? ' disabled="disabled"' : ''; ?> class="btn btn-default btn-block btn-danger">
-                <i class="fa fa-stop"></i> <?php $this->_('Teamspeak.tab_client_actions.action_stop'); ?>
+                <i class="fas fa-stop"></i> <?php $this->_('Teamspeak.tab_client_actions.action_stop'); ?>
             </button>
             <?php
                 $this->Form->end();
@@ -50,7 +50,7 @@
                 $this->Form->fieldHidden('action', 'remove_ban');
             ?>
             <button class="btn btn-default btn-block" style="margin-top: 5px;">
-                <i class="fa fa-ban"></i> <?php $this->_('Teamspeak.tab_client_actions.action_remove_ban'); ?>
+                <i class="fas fa-ban"></i> <?php $this->_('Teamspeak.tab_client_actions.action_remove_ban'); ?>
             </button>
             <?php
                 $this->Form->end();
@@ -62,7 +62,7 @@
                 $this->Form->fieldHidden('action', 'start');
             ?>
             <button<?php echo $this->Html->ifSet($status) != 'offline' ? ' disabled="disabled"' : ''; ?> class="btn btn-default btn-block">
-                <i class="fa fa-play"></i> <?php $this->_('Teamspeak.tab_client_actions.action_start'); ?>
+                <i class="fas fa-play"></i> <?php $this->_('Teamspeak.tab_client_actions.action_start'); ?>
             </button>
             <?php
                 $this->Form->end();
@@ -73,7 +73,7 @@
                 $this->Form->fieldHidden('action', 'reset_permissions');
             ?>
             <button class="btn btn-default btn-block" style="margin-top: 5px;">
-                <i class="fa fa-refresh"></i> <?php $this->_('Teamspeak.tab_client_actions.action_reset_permissions'); ?>
+                <i class="fas fa-sync-alt"></i> <?php $this->_('Teamspeak.tab_client_actions.action_reset_permissions'); ?>
             </button>
             <?php
                 $this->Form->end();
@@ -100,7 +100,7 @@
             </div>
         </div>
         <button class="btn btn-default pull-right">
-            <i class="fa fa-edit"></i> <?php $this->_('Teamspeak.tab_client_actions.field_name_submit'); ?>
+            <i class="fas fa-edit"></i> <?php $this->_('Teamspeak.tab_client_actions.field_name_submit'); ?>
         </button>
         <?php
             $this->Form->end();

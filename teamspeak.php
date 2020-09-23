@@ -56,13 +56,13 @@ class Teamspeak extends Module
     public function getClientTabs($package)
     {
         return [
-            'tabClientActions' => ['name' => Language::_('Teamspeak.tab_client_actions', true), 'icon' => 'fa fa-cog'],
+            'tabClientActions' => ['name' => Language::_('Teamspeak.tab_client_actions', true), 'icon' => 'fas fa-cog'],
             'tabClientClients' => [
-                'name' => Language::_('Teamspeak.tab_client_clients', true), 'icon' => 'fa fa-users'
+                'name' => Language::_('Teamspeak.tab_client_clients', true), 'icon' => 'fas fa-users'
             ],
-            'tabClientBans' => ['name' => Language::_('Teamspeak.tab_client_bans', true), 'icon' => 'fa fa-ban'],
-            'tabClientTokens' => ['name' => Language::_('Teamspeak.tab_client_tokens', true), 'icon' => 'fa fa-key'],
-            'tabClientLogs' => ['name' => Language::_('Teamspeak.tab_client_logs', true), 'icon' => 'fa fa-bar-chart']
+            'tabClientBans' => ['name' => Language::_('Teamspeak.tab_client_bans', true), 'icon' => 'fas fa-ban'],
+            'tabClientTokens' => ['name' => Language::_('Teamspeak.tab_client_tokens', true), 'icon' => 'fas fa-key'],
+            'tabClientLogs' => ['name' => Language::_('Teamspeak.tab_client_logs', true), 'icon' => 'fas fa-chart-bar']
         ];
     }
 
