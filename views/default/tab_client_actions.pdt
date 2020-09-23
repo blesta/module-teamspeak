@@ -73,7 +73,7 @@
                 $this->Form->fieldHidden('action', 'reset_permissions');
             ?>
             <button class="btn btn-default btn-block" style="margin-top: 5px;">
-                <i class="fas fa-refresh"></i> <?php $this->_('Teamspeak.tab_client_actions.action_reset_permissions'); ?>
+                <i class="fas fa-sync-alt"></i> <?php $this->_('Teamspeak.tab_client_actions.action_reset_permissions'); ?>
             </button>
             <?php
                 $this->Form->end();
