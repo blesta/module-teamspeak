@@ -75,7 +75,7 @@
     </div>
     <div class="button_row">
         <?php
-            $this->Form->fieldSubmit('submit', $this->_('Teamspeak.tab_bans.field_ban_submit', true), ['class' => 'btn btn-primary pull-right']);
+            $this->Form->fieldSubmit('submit', $this->_('Teamspeak.tab_bans.field_ban_submit', true), ['class' => 'btn btn-primary float-right']);
         ?>
     </div>
     <?php

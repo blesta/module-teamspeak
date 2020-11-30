@@ -29,7 +29,7 @@
                         } else {
                             $status_class = 'success';
                         } ?>
-                        <span class="label label-<?php $this->Html->_($status_class); ?>">
+                        <span class="badge badge-<?php $this->Html->_($status_class); ?>">
                             <?php $this->_('Teamspeak.tab_client_logs.type_' . $this->Html->_($log->type, true)); ?>
                         </span>
                     </td>

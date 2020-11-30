@@ -27,7 +27,7 @@
                         $this->Form->create();
                         $this->Form->fieldHidden('action', 'unban_client');
                         $this->Form->fieldHidden('banid', $ban->banid); ?>
-                        <button class="btn btn-default btn-sm btn-success">
+                        <button class="btn btn-light btn-sm btn-success">
                             <i class="fas fa-check"></i> <?php $this->_('Teamspeak.tab_client_bans.action_unban_client'); ?>
                         </button>
                         <?php
@@ -50,7 +50,7 @@
 
     <div class="row options">
         <div class="col-md-12">
-            <a href="#" class="ban btn btn-default pull-right" style="margin-top: 5px;">
+            <a href="#" class="ban btn btn-light float-right" style="margin-top: 5px;">
                 <i class="fas fa-plus"></i> <?php $this->_('Teamspeak.tab_client_bans.action_ban'); ?>
             </a>
         </div>
@@ -64,7 +64,7 @@
         <?php
             $this->Form->create($this->base_uri . 'services/manage/' . $this->Html->ifSet($service_id) . '/tabClientBans/');
         ?>
-        <div class="col-md-12">
+        <div class="w-100">
             <div class="form-group">
                 <?php
                     $this->Form->label($this->_('Teamspeak.tab_client_bans.field_ip_address', true), 'ip_address');
@@ -79,7 +79,7 @@
                 ?>
             </div>
         </div>
-        <button class="btn btn-default pull-right">
+        <button class="btn btn-light float-right">
             <i class="fas fa-plus"></i> <?php $this->_('Teamspeak.tab_client_bans.field_ban_submit'); ?>
         </button>
         <?php

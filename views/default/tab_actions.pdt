@@ -28,7 +28,7 @@
                     $this->Form->create();
                     $this->Form->fieldHidden('action', 'restart');
                 ?>
-                <button<?php echo $this->Html->ifSet($status) != 'online' ? ' disabled="disabled"' : ''; ?> class="btn btn-default btn-block btn-success">
+                <button<?php echo $this->Html->ifSet($status) != 'online' ? ' disabled="disabled"' : ''; ?> class="btn btn-success btn-block">
                     <i class="fas fa-sync-alt"></i> <?php $this->_('Teamspeak.tab_actions.action_restart'); ?>
                 </button>
                 <?php
@@ -51,7 +51,7 @@
                     $this->Form->create();
                     $this->Form->fieldHidden('action', 'stop');
                 ?>
-                <button<?php echo $this->Html->ifSet($status) != 'online' ? ' disabled="disabled"' : ''; ?> class="btn btn-default btn-block btn-danger">
+                <button<?php echo $this->Html->ifSet($status) != 'online' ? ' disabled="disabled"' : ''; ?> class="btn btn-danger btn-block">
                     <i class="fas fa-stop"></i> <?php $this->_('Teamspeak.tab_actions.action_stop'); ?>
                 </button>
                 <?php
@@ -115,7 +115,7 @@
         </div>
         <div class="button_row">
             <?php
-            $this->Form->fieldSubmit('save', $this->_('Teamspeak.tab_actions.field_name_submit', true), ['class' => 'btn btn-primary pull-right']);
+            $this->Form->fieldSubmit('save', $this->_('Teamspeak.tab_actions.field_name_submit', true), ['class' => 'btn btn-primary float-right']);
             ?>
         </div>
         <?php
