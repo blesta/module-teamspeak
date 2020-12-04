@@ -22,14 +22,16 @@
                         <td><?php $this->Html->_($token->token_description); ?></td>
                         <td>
                             <?php
-                                $this->Form->create();
+                            $this->Form->create();
                             $this->Form->fieldHidden('action', 'delete_token');
-                            $this->Form->fieldHidden('token', $token->token); ?>
+                            $this->Form->fieldHidden('token', $token->token);
+                            ?>
                                 <a href="#" class="submit manage">
                                     <?php $this->_('Teamspeak.tab_tokens.action_delete_token'); ?>
                                 </a>
                             <?php
-                                $this->Form->end(); ?>
+                            $this->Form->end();
+                            ?>
                         </td>
                     </tr>
                 <?php
@@ -72,7 +74,7 @@
     </div>
     <div class="button_row">
         <?php
-            $this->Form->fieldSubmit('submit', $this->_('Teamspeak.tab_tokens.field_token_submit', true), ['class' => 'btn btn-primary pull-right']);
+            $this->Form->fieldSubmit('submit', $this->_('Teamspeak.tab_tokens.field_token_submit', true), ['class' => 'btn btn-primary float-right']);
         ?>
     </div>
     <?php

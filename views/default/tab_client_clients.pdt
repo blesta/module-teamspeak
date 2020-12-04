@@ -22,7 +22,7 @@
                             $this->Form->create();
                         $this->Form->fieldHidden('action', 'kick_client');
                         $this->Form->fieldHidden('clid', $client->clid); ?>
-                            <button class="btn btn-default btn-sm btn-danger">
+                            <button class="btn btn-light btn-sm btn-danger">
                                 <i class="fas fa-ban"></i> <?php $this->_('Teamspeak.tab_client_clients.action_kick_client'); ?>
                             </button>
                         <?php
