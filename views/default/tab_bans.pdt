@@ -61,13 +61,13 @@
             <li>
                 <?php
                     $this->Form->label($this->_('Teamspeak.tab_bans.field_ip_address', true), 'ip_address');
-                    $this->Form->fieldText('ip_address', $this->Html->ifSet($vars->ip_address), ['id' => 'ip_address', 'placeholder' => $this->_('Teamspeak.tab_bans.field_ip_address', true)]);
+                    $this->Form->fieldText('ip_address', (isset($vars->ip_address) ? $vars->ip_address : null), ['id' => 'ip_address', 'placeholder' => $this->_('Teamspeak.tab_bans.field_ip_address', true)]);
                 ?>
             </li>
             <li>
                 <?php
                     $this->Form->label($this->_('Teamspeak.tab_bans.field_reason', true), 'reason');
-                    $this->Form->fieldText('reason', $this->Html->ifSet($vars->reason), ['id' => 'reason', 'placeholder' => $this->_('Teamspeak.tab_bans.field_reason', true)]);
+                    $this->Form->fieldText('reason', (isset($vars->reason) ? $vars->reason : null), ['id' => 'reason', 'placeholder' => $this->_('Teamspeak.tab_bans.field_reason', true)]);
                     $this->Form->fieldHidden('action', 'create_ban');
                 ?>
             </li>

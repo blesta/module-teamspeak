@@ -60,13 +60,13 @@
             <li>
                 <?php
                     $this->Form->label($this->_('Teamspeak.tab_tokens.field_sgid', true), 'sgid');
-                    $this->Form->fieldSelect('sgid', $server_groups_options, $this->Html->ifSet($vars->sgid), ['id' => 'sgid']);
+                    $this->Form->fieldSelect('sgid', $server_groups_options, (isset($vars->sgid) ? $vars->sgid : null), ['id' => 'sgid']);
                 ?>
             </li>
             <li>
                 <?php
                     $this->Form->label($this->_('Teamspeak.tab_tokens.field_description', true), 'description');
-                    $this->Form->fieldText('description', $this->Html->ifSet($vars->token), ['id' => 'description', 'placeholder' => $this->_('Teamspeak.tab_tokens.field_description', true)]);
+                    $this->Form->fieldText('description', (isset($vars->token) ? $vars->token : null), ['id' => 'description', 'placeholder' => $this->_('Teamspeak.tab_tokens.field_description', true)]);
                     $this->Form->fieldHidden('action', 'create_token');
                 ?>
             </li>
