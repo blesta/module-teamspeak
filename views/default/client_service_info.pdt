@@ -10,15 +10,15 @@
             <tbody>
                 <tr>
                     <td></td>
-                    <td><?php $this->Html->_($module_row->meta->hostname); ?></td>
-                    <td><?php $this->Html->_($service_fields->teamspeak_port); ?></td>
+                    <td><?php (echo isset($module_row->meta->hostname) ? $this->Html->safe($module_row->meta->hostname) : null); ?></td>
+                    <td><?php (echo isset($service_fields->teamspeak_port) ? $this->Html->safe($service_fields->teamspeak_port) : null); ?></td>
                 </tr>
             </tbody>
         </table>
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#teamspeak_login<?php $this->Html->_($service->id);?>').click(function(e) {
+            $('#teamspeak_login<?php (echo isset($service->id) ? $this->Html->safe($service->id) : null);?>').click(function(e) {
                 e.preventDefault();
 
                 $(this).closest('form').submit();
