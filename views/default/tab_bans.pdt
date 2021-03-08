@@ -19,10 +19,10 @@
                         $date = date('M d, Y', $ban->created);
                         $rule = !empty($ban->ip) ? $ban->ip : $ban->lastnickname; ?>
                     <tr<?php echo $this->Html->concat(' ', ($i % 2 == 1) ? ' class="odd_row"' : '', ''); ?>>
-                        <td><?php (echo isset($date) ? $this->Html->safe($date) : null); ?></td>
-                        <td><?php (echo isset($ban->banid) ? $this->Html->safe($ban->banid) : null); ?></td>
-                        <td><?php (echo isset($rule) ? $this->Html->safe($rule) : null); ?></td>
-                        <td><?php (echo isset($ban->reason) ? $this->Html->safe($ban->reason) : null); ?></td>
+                        <td><?php echo (isset($date) ? $this->Html->safe($date) : null); ?></td>
+                        <td><?php echo (isset($ban->banid) ? $this->Html->safe($ban->banid) : null); ?></td>
+                        <td><?php echo (isset($rule) ? $this->Html->safe($rule) : null); ?></td>
+                        <td><?php echo (isset($ban->reason) ? $this->Html->safe($ban->reason) : null); ?></td>
                         <td>
                             <?php
                             $this->Form->create();

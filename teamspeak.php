@@ -360,7 +360,7 @@ class Teamspeak extends Module
         $port->attach(
             $fields->fieldText(
                 'teamspeak_port',
-                $this->Html->ifSet($vars->teamspeak_port, $this->Html->ifSet($vars->port)),
+                (isset($vars->teamspeak_port) ? $vars->teamspeak_port : ($vars->port ?? null)),
                 ['id' => 'teamspeak_port']
             )
         );
@@ -376,7 +376,7 @@ class Teamspeak extends Module
         $sid->attach(
             $fields->fieldText(
                 'teamspeak_sid',
-                $this->Html->ifSet($vars->teamspeak_sid, $this->Html->ifSet($vars->sid)),
+                (isset($vars->teamspeak_sid) ? $vars->teamspeak_sid : ($vars->sid ?? null)),
                 ['id' => 'teamspeak_sid']
             )
         );
@@ -409,7 +409,7 @@ class Teamspeak extends Module
         $name->attach(
             $fields->fieldText(
                 'teamspeak_name',
-                $this->Html->ifSet($vars->teamspeak_name, $this->Html->ifSet($vars->name)),
+                (isset($vars->teamspeak_name) ? $vars->teamspeak_name : ($vars->name ?? null)),
                 ['id' => 'teamspeak_name']
             )
         );
@@ -439,7 +439,7 @@ class Teamspeak extends Module
         $name->attach(
             $fields->fieldText(
                 'teamspeak_name',
-                $this->Html->ifSet($vars->teamspeak_name, $this->Html->ifSet($vars->name)),
+                (isset($vars->teamspeak_name) ? $vars->teamspeak_name : ($vars->name ?? null)),
                 ['id' => 'teamspeak_name']
             )
         );
@@ -452,7 +452,7 @@ class Teamspeak extends Module
         $port->attach(
             $fields->fieldText(
                 'teamspeak_port',
-                $this->Html->ifSet($vars->teamspeak_port, $this->Html->ifSet($vars->port)),
+                (isset($vars->teamspeak_port) ? $vars->teamspeak_port : ($vars->port ?? null)),
                 ['id' => 'teamspeak_port']
             )
         );
@@ -465,7 +465,7 @@ class Teamspeak extends Module
         $sid->attach(
             $fields->fieldText(
                 'teamspeak_sid',
-                $this->Html->ifSet($vars->teamspeak_sid, $this->Html->ifSet($vars->sid)),
+                (isset($vars->teamspeak_sid) ? $vars->teamspeak_sid : ($vars->sid ?? null)),
                 ['id' => 'teamspeak_sid']
             )
         );

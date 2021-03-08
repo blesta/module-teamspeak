@@ -16,9 +16,9 @@
                 foreach ($tokens->tokens as $token) {
                     $date = date('M d, Y', $token->token_created); ?>
                 <tr>
-                    <td><?php (echo isset($date) ? $this->Html->safe($date) : null); ?></td>
-                    <td><?php (echo isset($token->token) ? $this->Html->safe($token->token) : null); ?></td>
-                    <td><?php (echo isset($token->token_description) ? $this->Html->safe($token->token_description) : null); ?></td>
+                    <td><?php echo (isset($date) ? $this->Html->safe($date) : null); ?></td>
+                    <td><?php echo (isset($token->token) ? $this->Html->safe($token->token) : null); ?></td>
+                    <td><?php echo (isset($token->token_description) ? $this->Html->safe($token->token_description) : null); ?></td>
                     <td>
                         <?php
                             $this->Form->create();

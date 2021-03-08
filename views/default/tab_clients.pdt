@@ -17,8 +17,8 @@
                     foreach ($server_clients->clients as $client) {
                         ?>
                     <tr<?php echo $this->Html->concat(' ', ($i % 2 == 1) ? ' class="odd_row"' : '', ''); ?>>
-                        <td><?php (echo isset($client->clid) ? $this->Html->safe($client->clid) : null); ?></td>
-                        <td><?php (echo isset($client->name) ? $this->Html->safe($client->name) : null); ?></td>
+                        <td><?php echo (isset($client->clid) ? $this->Html->safe($client->clid) : null); ?></td>
+                        <td><?php echo (isset($client->name) ? $this->Html->safe($client->name) : null); ?></td>
                         <td>
                             <?php
                                 $this->Form->create();
