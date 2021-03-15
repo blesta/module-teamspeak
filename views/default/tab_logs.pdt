@@ -18,7 +18,7 @@
                     foreach ($log->log as $log) {
                         ?>
                     <tr<?php echo $this->Html->concat(' ', ($i % 2 == 1) ? ' class="odd_row"' : '', ''); ?>>
-                        <td><?php $this->Html->_($log->date); ?></td>
+                        <td><?php echo (isset($log->date) ? $this->Html->safe($log->date) : null); ?></td>
                         <td>
                             <?php
                             if ($log->type == 'WARNING') {
@@ -30,13 +30,13 @@
                             } else {
                                 $status_class = 'success';
                             } ?>
-                            <span class="badge badge-<?php $this->Html->_($status_class); ?>">
-                                <?php $this->_('Teamspeak.tab_logs.type_' . $this->Html->_($log->type, true)); ?>
+                            <span class="badge badge-<?php echo (isset($status_class) ? $this->Html->safe($status_class) : null); ?>">
+                                <?php $this->_('Teamspeak.tab_logs.type_' . (isset($log->type) ? $this->Html->safe($log->type) : null)); ?>
                             </span>
                         </td>
-                        <td><?php $this->Html->_($log->function); ?></td>
-                        <td><?php $this->Html->_($log->server_id); ?></td>
-                        <td><?php $this->Html->_($log->description); ?></td>
+                        <td><?php echo (isset($log->function) ? $this->Html->safe($log->function) : null); ?></td>
+                        <td><?php echo (isset($log->server_id) ? $this->Html->safe($log->server_id) : null); ?></td>
+                        <td><?php echo (isset($log->description) ? $this->Html->safe($log->description) : null); ?></td>
                     </tr>
                 <?php
                         $i++;
