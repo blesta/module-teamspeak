@@ -1,5 +1,5 @@
 {
-    "version": "1.8.0",
+    "version": "2.0.0",
     "name": "Teamspeak.name",
     "description": "Teamspeak.description",
     "authors": [
@@ -21,13 +21,19 @@
         "row_key": "server_name"
     },
     "email_tags": {
-        "module": ["hostname", "server_name"],
-        "package": ["maxclients"],
+        "module": [
+            "hostname",
+            "server_name"
+        ],
+        "package": [
+            "maxclients"
+        ],
         "service": [
             "teamspeak_sid",
             "teamspeak_token",
             "teamspeak_name",
             "teamspeak_port"
         ]
-    }
+    },
+    "icon": "bi-headset"
 }

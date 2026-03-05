@@ -70,11 +70,7 @@ class TeamSpeak3_Helper_String implements ArrayAccess, Iterator, Countable
      */
     public function replace($search, $replace, $caseSensitivity = true)
     {
-        if ($caseSensitivity) {
-            $this->string = str_replace($search, $replace, $this->string);
-        } else {
-            $this->string = str_ireplace($search, $replace, $this->string);
-        }
+        $this->string = $caseSensitivity ? str_replace($search, $replace, $this->string) : str_ireplace($search, $replace, $this->string);
 
         return $this;
     }
@@ -542,7 +538,7 @@ class TeamSpeak3_Helper_String implements ArrayAccess, Iterator, Countable
     {
         $this->string = str_replace($spacer, ' ', $this->string);
         $this->string = $this->transliterate();
-        $this->string = preg_replace("/(\s|[^A-Za-z0-9\-])+/", $spacer, trim(strtolower($this->string)));
+        $this->string = preg_replace('/(\s|[^A-Za-z0-9\-])+/', $spacer, trim(strtolower($this->string)));
         $this->string = trim($this->string, $spacer);
 
         return new self($this->string);

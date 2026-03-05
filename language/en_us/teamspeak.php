@@ -19,6 +19,8 @@ $lang['Teamspeak.tab_client_bans'] = 'Bans';
 $lang['Teamspeak.tab_client_tokens'] = 'Tokens';
 $lang['Teamspeak.tab_client_logs'] = 'Logs';
 
+$lang['Teamspeak.back_to_manage'] = 'Back';
+
 // Module management
 $lang['Teamspeak.add_module_row'] = 'Add Server';
 $lang['Teamspeak.add_module_group'] = 'Add Server Group';

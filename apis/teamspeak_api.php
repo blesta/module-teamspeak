@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TeamSpeak API.
  *
@@ -8,6 +9,7 @@
  * @license http://www.blesta.com/license/ The Blesta License Agreement
  * @link http://www.blesta.com/ Blesta
  */
+
 require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'framework' . DIRECTORY_SEPARATOR . 'TeamSpeak3.php';
 
 class TeamspeakApi
@@ -83,11 +85,11 @@ class TeamspeakApi
         try {
             // Build the parameters array
             $api_params = [
-                'virtualserver_name' => isset($params['name']) ? $params['name'] : null,
-                'virtualserver_maxclients' => isset($params['maxclients']) ? $params['maxclients'] : null,
-                'virtualserver_port' => isset($params['port']) ? $params['port'] : null,
-                'virtualserver_hostbutton_tooltip' => isset($params['tooltip']) ? $params['tooltip'] : null,
-                'virtualserver_hostbutton_url' => isset($params['url']) ? $params['url'] : null
+                'virtualserver_name' => $params['name'] ?? null,
+                'virtualserver_maxclients' => $params['maxclients'] ?? null,
+                'virtualserver_port' => $params['port'] ?? null,
+                'virtualserver_hostbutton_tooltip' => $params['tooltip'] ?? null,
+                'virtualserver_hostbutton_url' => $params['url'] ?? null
             ];
 
             // Create the virtual server
@@ -102,7 +104,7 @@ class TeamspeakApi
             if (isset($result['token'])) {
                 $result['token'] = (string) $result['token'];
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -130,11 +132,11 @@ class TeamspeakApi
         try {
             // Build the parameters array
             $api_params = [
-                'virtualserver_name' => isset($params['name']) ? $params['name'] : null,
-                'virtualserver_maxclients' => isset($params['maxclients']) ? $params['maxclients'] : null,
-                'virtualserver_port' => isset($params['port']) ? $params['port'] : null,
-                'virtualserver_hostbutton_tooltip' => isset($params['tooltip']) ? $params['tooltip'] : null,
-                'virtualserver_hostbutton_url' => isset($params['url']) ? $params['url'] : null
+                'virtualserver_name' => $params['name'] ?? null,
+                'virtualserver_maxclients' => $params['maxclients'] ?? null,
+                'virtualserver_port' => $params['port'] ?? null,
+                'virtualserver_hostbutton_tooltip' => $params['tooltip'] ?? null,
+                'virtualserver_hostbutton_url' => $params['url'] ?? null
             ];
 
             // Fetch the virtual server instance, and modify it
@@ -150,7 +152,7 @@ class TeamspeakApi
             if (isset($result['token'])) {
                 $result['token'] = (string) $result['token'];
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -173,7 +175,7 @@ class TeamspeakApi
             // Stop the virtual server
             try {
                 $this->apiRequest('serverquery')->serverStop($sid);
-            } catch (Exception $e) {
+            } catch (\Throwable $e) {
                 // Throw the exception only if the code isn't equal to 1033
                 $code = $e->getCode();
                 if ($code == !1033) {
@@ -188,7 +190,7 @@ class TeamspeakApi
             $result = [
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -221,7 +223,7 @@ class TeamspeakApi
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -252,7 +254,7 @@ class TeamspeakApi
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -275,7 +277,7 @@ class TeamspeakApi
             // Start the virtual server
             try {
                 $result = $this->apiRequest('serverquery')->serverStart($sid);
-            } catch (Exception $e) {
+            } catch (\Throwable $e) {
                 // Throw the exception only if the code isn't equal to 1033
                 $code = $e->getCode();
                 if ($code == !1033) {
@@ -287,7 +289,7 @@ class TeamspeakApi
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -312,7 +314,7 @@ class TeamspeakApi
             try {
                 $this->apiRequest('serverquery')->serverStop($sid);
                 $result = $this->apiRequest('serverquery')->serverStart($sid);
-            } catch (Exception $e) {
+            } catch (\Throwable $e) {
                 // Throw the exception only if the code isn't equal to 1033
                 $code = $e->getCode();
                 if ($code == !1033) {
@@ -324,7 +326,7 @@ class TeamspeakApi
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -347,7 +349,7 @@ class TeamspeakApi
             // Stop the virtual server
             try {
                 $result = $this->apiRequest('serverquery')->serverStop($sid);
-            } catch (Exception $e) {
+            } catch (\Throwable $e) {
                 // Throw the exception only if the code isn't equal to 1033
                 $code = $e->getCode();
                 if ($code == !1033) {
@@ -359,7 +361,7 @@ class TeamspeakApi
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -398,7 +400,7 @@ class TeamspeakApi
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -437,7 +439,7 @@ class TeamspeakApi
             if (empty($result['error'])) {
                 $result['status'] = true;
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -507,7 +509,7 @@ class TeamspeakApi
                 'instance' => $instance,
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -558,7 +560,7 @@ class TeamspeakApi
                 'server_groups' => $options,
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -597,7 +599,7 @@ class TeamspeakApi
                 'token' => (string) $token,
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -634,7 +636,7 @@ class TeamspeakApi
             $result = [
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -677,7 +679,7 @@ class TeamspeakApi
                 'tokens' => $options,
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -714,7 +716,7 @@ class TeamspeakApi
             $result = [
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -755,7 +757,7 @@ class TeamspeakApi
                 'instance' => $instance,
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -806,7 +808,7 @@ class TeamspeakApi
                 'clients' => $options,
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -843,7 +845,7 @@ class TeamspeakApi
                 'token' => (string) $token,
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -897,7 +899,7 @@ class TeamspeakApi
                 'log' => $log,
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -936,7 +938,7 @@ class TeamspeakApi
                 'banid' => $banid,
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -973,7 +975,7 @@ class TeamspeakApi
             $result = [
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -1009,7 +1011,7 @@ class TeamspeakApi
             $result = [
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,
@@ -1052,7 +1054,7 @@ class TeamspeakApi
                 'bans' => $options,
                 'status' => true
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $result = [
                 'error' => $e->getMessage(),
                 'status' => false,

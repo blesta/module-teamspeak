@@ -1,5 +1,7 @@
 <?php
+
 use Blesta\Core\Util\Validate\Server;
+
 /**
  * TeamSpeak Module.
  *
@@ -107,7 +109,7 @@ class Teamspeak extends Module
         $maxclients->attach(
             $fields->fieldText(
                 'meta[maxclients]',
-                (isset($vars->meta['maxclients']) ? $vars->meta['maxclients'] : null),
+                ($vars->meta['maxclients'] ?? null),
                 ['id' => 'teamspeak_maxclients']
             )
         );
@@ -231,6 +233,14 @@ class Teamspeak extends Module
         // Load the helpers required for this view
         Loader::loadHelpers($this, ['Form', 'Html', 'Widget']);
 
+        // Fetch module
+        Loader::loadModels($this, ['ModuleManager']);
+        $module = $this->ModuleManager->getByClass(
+            \Illuminate\Support\Str::snake(get_class($this)),
+            Configure::get('Blesta.company_id')
+        );
+        $module = ($module[0] ?? []);
+        $this->view->set('module', (object) $module);
         $this->view->set('vars', (object) $vars);
 
         return $this->view->fetch();
@@ -258,6 +268,14 @@ class Teamspeak extends Module
             $vars = $module_row->meta;
         }
 
+        // Fetch module
+        Loader::loadModels($this, ['ModuleManager']);
+        $module = $this->ModuleManager->getByClass(
+            \Illuminate\Support\Str::snake(get_class($this)),
+            Configure::get('Blesta.company_id')
+        );
+        $module = ($module[0] ?? []);
+        $this->view->set('module', (object) $module);
         $this->view->set('vars', (object) $vars);
 
         return $this->view->fetch();
@@ -360,7 +378,7 @@ class Teamspeak extends Module
         $port->attach(
             $fields->fieldText(
                 'teamspeak_port',
-                (isset($vars->teamspeak_port) ? $vars->teamspeak_port : ($vars->port ?? null)),
+                ($vars->teamspeak_port ?? ($vars->port ?? null)),
                 ['id' => 'teamspeak_port']
             )
         );
@@ -376,7 +394,7 @@ class Teamspeak extends Module
         $sid->attach(
             $fields->fieldText(
                 'teamspeak_sid',
-                (isset($vars->teamspeak_sid) ? $vars->teamspeak_sid : ($vars->sid ?? null)),
+                ($vars->teamspeak_sid ?? ($vars->sid ?? null)),
                 ['id' => 'teamspeak_sid']
             )
         );
@@ -409,7 +427,7 @@ class Teamspeak extends Module
         $name->attach(
             $fields->fieldText(
                 'teamspeak_name',
-                (isset($vars->teamspeak_name) ? $vars->teamspeak_name : ($vars->name ?? null)),
+                ($vars->teamspeak_name ?? ($vars->name ?? null)),
                 ['id' => 'teamspeak_name']
             )
         );
@@ -439,7 +457,7 @@ class Teamspeak extends Module
         $name->attach(
             $fields->fieldText(
                 'teamspeak_name',
-                (isset($vars->teamspeak_name) ? $vars->teamspeak_name : ($vars->name ?? null)),
+                ($vars->teamspeak_name ?? ($vars->name ?? null)),
                 ['id' => 'teamspeak_name']
             )
         );
@@ -452,7 +470,7 @@ class Teamspeak extends Module
         $port->attach(
             $fields->fieldText(
                 'teamspeak_port',
-                (isset($vars->teamspeak_port) ? $vars->teamspeak_port : ($vars->port ?? null)),
+                ($vars->teamspeak_port ?? ($vars->port ?? null)),
                 ['id' => 'teamspeak_port']
             )
         );
@@ -465,7 +483,7 @@ class Teamspeak extends Module
         $sid->attach(
             $fields->fieldText(
                 'teamspeak_sid',
-                (isset($vars->teamspeak_sid) ? $vars->teamspeak_sid : ($vars->sid ?? null)),
+                ($vars->teamspeak_sid ?? ($vars->sid ?? null)),
                 ['id' => 'teamspeak_sid']
             )
         );
@@ -594,7 +612,7 @@ class Teamspeak extends Module
 
                 // Create virtual server
                 $result = $this->parseResponse($api->createServer($params));
-            } catch (Exception $e) {
+            } catch (\Throwable $e) {
                 $this->Input->setErrors(
                     ['api' => ['internal' => Language::_('Teamspeak.!error.api.internal', true)]]
                 );
@@ -1023,7 +1041,7 @@ class Teamspeak extends Module
                     Loader::loadModels($this, ['Services']);
                     $this->Services->editField(
                         $service->id,
-                        ['key' => 'teamspeak_name', 'value' => (isset($post['name']) ? $post['name'] : null)]
+                        ['key' => 'teamspeak_name', 'value' => ($post['name'] ?? null)]
                     );
 
                     if (($errors = $this->Services->errors())) {
@@ -1031,7 +1049,7 @@ class Teamspeak extends Module
                     }
 
                     $params = [
-                        'name' => (isset($post['name']) ? $post['name'] : null),
+                        'name' => ($post['name'] ?? null),
                         'maxclients' => $package->meta->maxclients,
                         'port' => $service_fields->teamspeak_port
                     ];
@@ -1054,7 +1072,7 @@ class Teamspeak extends Module
         $this->view->set('service_fields', $service_fields);
         $this->view->set('service_id', $service->id);
         $this->view->set('server_info', $server_info);
-        $this->view->set('vars', (isset($vars) ? $vars : new stdClass()));
+        $this->view->set('vars', ($vars ?? new stdClass()));
 
         $this->view->setDefaultView('components' . DS . 'modules' . DS . 'teamspeak' . DS);
 
@@ -1098,7 +1116,7 @@ class Teamspeak extends Module
             switch ($post['action']) {
                 case 'kick_client':
                     $this->parseResponse(
-                        $api->kickClient($service_fields->teamspeak_sid, (isset($post['clid']) ? $post['clid'] : null))
+                        $api->kickClient($service_fields->teamspeak_sid, ($post['clid'] ?? null))
                     );
                     break;
                 default:
@@ -1156,15 +1174,15 @@ class Teamspeak extends Module
             switch ($post['action']) {
                 case 'unban_client':
                     $this->parseResponse(
-                        $api->deleteBan($service_fields->teamspeak_sid, (isset($post['banid']) ? $post['banid'] : null))
+                        $api->deleteBan($service_fields->teamspeak_sid, ($post['banid'] ?? null))
                     );
                     break;
                 case 'create_ban':
                     $this->parseResponse(
                         $api->addBan(
                             $service_fields->teamspeak_sid,
-                            (isset($post['ip_address']) ? $post['ip_address'] : null),
-                            (isset($post['reason']) ? $post['reason'] : null)
+                            ($post['ip_address'] ?? null),
+                            ($post['reason'] ?? null)
                         )
                     );
                     break;
@@ -1225,14 +1243,14 @@ class Teamspeak extends Module
                     $this->parseResponse(
                         $api->createPrivilegeKey(
                             $service_fields->teamspeak_sid,
-                            (isset($post['sgid']) ? $post['sgid'] : null),
-                            (isset($post['description']) ? $post['description'] : null)
+                            ($post['sgid'] ?? null),
+                            ($post['description'] ?? null)
                         )
                     );
                     break;
                 case 'delete_token':
                     $this->parseResponse(
-                        $api->deletePrivilegeKey($service_fields->teamspeak_sid, (isset($post['token']) ? $post['token'] : null))
+                        $api->deletePrivilegeKey($service_fields->teamspeak_sid, ($post['token'] ?? null))
                     );
                     break;
                 default:
@@ -1358,7 +1376,7 @@ class Teamspeak extends Module
                     Loader::loadModels($this, ['Services']);
                     $this->Services->editField(
                         $service->id,
-                        ['key' => 'teamspeak_name', 'value' => (isset($post['name']) ? $post['name'] : null)]
+                        ['key' => 'teamspeak_name', 'value' => ($post['name'] ?? null)]
                     );
 
                     if (($errors = $this->Services->errors())) {
@@ -1366,7 +1384,7 @@ class Teamspeak extends Module
                     }
 
                     $params = [
-                        'name' => (isset($post['name']) ? $post['name'] : null),
+                        'name' => ($post['name'] ?? null),
                         'maxclients' => $package->meta->maxclients,
                         'port' => $service_fields->teamspeak_port
                     ];
@@ -1433,7 +1451,7 @@ class Teamspeak extends Module
             switch ($post['action']) {
                 case 'kick_client':
                     $this->parseResponse(
-                        $api->kickClient($service_fields->teamspeak_sid, (isset($post['clid']) ? $post['clid'] : null))
+                        $api->kickClient($service_fields->teamspeak_sid, ($post['clid'] ?? null))
                     );
                     break;
                 default:
@@ -1491,15 +1509,15 @@ class Teamspeak extends Module
             switch ($post['action']) {
                 case 'unban_client':
                     $this->parseResponse(
-                        $api->deleteBan($service_fields->teamspeak_sid, (isset($post['banid']) ? $post['banid'] : null))
+                        $api->deleteBan($service_fields->teamspeak_sid, ($post['banid'] ?? null))
                     );
                     break;
                 case 'create_ban':
                     $this->parseResponse(
                         $api->addBan(
                             $service_fields->teamspeak_sid,
-                            (isset($post['ip_address']) ? $post['ip_address'] : null),
-                            (isset($post['reason']) ? $post['reason'] : null)
+                            ($post['ip_address'] ?? null),
+                            ($post['reason'] ?? null)
                         )
                     );
                     break;
@@ -1560,14 +1578,14 @@ class Teamspeak extends Module
                     $this->parseResponse(
                         $api->createPrivilegeKey(
                             $service_fields->teamspeak_sid,
-                            (isset($post['sgid']) ? $post['sgid'] : null),
-                            (isset($post['description']) ? $post['description'] : null)
+                            ($post['sgid'] ?? null),
+                            ($post['description'] ?? null)
                         )
                     );
                     break;
                 case 'delete_token':
                     $this->parseResponse(
-                        $api->deletePrivilegeKey($service_fields->teamspeak_sid, (isset($post['token']) ? $post['token'] : null))
+                        $api->deletePrivilegeKey($service_fields->teamspeak_sid, ($post['token'] ?? null))
                     );
                     break;
                 default:
@@ -1680,7 +1698,7 @@ class Teamspeak extends Module
             } elseif (isset($output->code) && $output->code == 1281) {
                 $accounts = 0;
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             // Nothing to do
         }
 
@@ -1735,7 +1753,7 @@ class Teamspeak extends Module
             $servers = $api->listServers();
 
             return is_object($servers);
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             // Trap any errors encountered, could not validate connection
         }
 

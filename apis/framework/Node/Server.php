@@ -174,7 +174,7 @@ class TeamSpeak3_Node_Server extends TeamSpeak3_Node_Abstract
      */
     public function channelIsSpacer(TeamSpeak3_Node_Channel $channel)
     {
-        return (preg_match("/\[[^\]]*spacer[^\]]*\]/", $channel) && $channel['channel_flag_permanent'] && !$channel['pid']) ? true : false;
+        return (preg_match('/\[[^\]]*spacer[^\]]*\]/', $channel) && $channel['channel_flag_permanent'] && !$channel['pid']) ? true : false;
     }
 
     /**
@@ -291,7 +291,7 @@ class TeamSpeak3_Node_Server extends TeamSpeak3_Node_Abstract
     {
         $channel = $this->channelGetById($cid);
 
-        if (!$this->channelIsSpacer($channel) || !preg_match("/\[(.*)spacer.*\]/", $channel, $matches) || !isset($matches[1])) {
+        if (!$this->channelIsSpacer($channel) || !preg_match('/\[(.*)spacer.*\]/', $channel, $matches) || !isset($matches[1])) {
             throw new TeamSpeak3_Adapter_ServerQuery_Exception('invalid channel flags', 0x307);
         }
 
@@ -1843,7 +1843,7 @@ class TeamSpeak3_Node_Server extends TeamSpeak3_Node_Abstract
 
                 try {
                     $tokens[$token]['token_id1'] = $this->$func($array['token_id1'])->name;
-                } catch (Exception $e) {
+                } catch (\Throwable $e) {
                     /* ERROR_channel_invalid_id */
                     if ($e->getCode() != 0xA00) {
                         throw $e;
@@ -1854,7 +1854,7 @@ class TeamSpeak3_Node_Server extends TeamSpeak3_Node_Abstract
                     if ($array['token_type']) {
                         $tokens[$token]['token_id2'] = $this->channelGetById($array['token_id2'])->getPathway();
                     }
-                } catch (Exception $e) {
+                } catch (\Throwable $e) {
                     /* ERROR_permission_invalid_group_id */
                     if ($e->getCode() != 0x300) {
                         throw $e;
@@ -2082,7 +2082,7 @@ class TeamSpeak3_Node_Server extends TeamSpeak3_Node_Abstract
 
                     $passwords[$password]['tcname'] = $channel->toString();
                     $passwords[$password]['tcpath'] = $channel->getPathway();
-                } catch (Exception $e) {
+                } catch (\Throwable $e) {
                     /* ERROR_channel_invalid_id */
                     if ($e->getCode() != 0xA00) {
                         throw $e;

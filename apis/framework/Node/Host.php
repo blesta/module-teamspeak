@@ -664,11 +664,7 @@ class TeamSpeak3_Node_Host extends TeamSpeak3_Node_Abstract
             $permid = $this->permissionGetIdByName($permid);
         }
 
-        if ($permid < 0x1000) {
-            return (int) $permid + 0x8000;
-        } else {
-            return (int) bindec(substr(decbin($permid), -8)) + 0xFF00;
-        }
+        return $permid < 0x1000 ? (int) $permid + 0x8000 : (int) bindec(substr(decbin($permid), -8)) + 0xFF00;
     }
 
     /**
@@ -1122,7 +1118,7 @@ class TeamSpeak3_Node_Host extends TeamSpeak3_Node_Abstract
 
             try {
                 call_user_func_array([$this, $func], $args);
-            } catch (Exception $e) {
+            } catch (\Throwable $e) {
                 $class = get_class($e);
 
                 throw new $class($e->getMessage(), $e->getCode());

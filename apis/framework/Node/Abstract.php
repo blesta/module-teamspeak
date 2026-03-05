@@ -221,11 +221,7 @@ abstract class TeamSpeak3_Node_Abstract implements RecursiveIterator, ArrayAcces
                 $props = array_intersect_key($props, $rules);
 
                 foreach ($props as $key => $val) {
-                    if ($val instanceof TeamSpeak3_Helper_String) {
-                        $match = $val->contains($rules[$key], true);
-                    } else {
-                        $match = $val == $rules[$key];
-                    }
+                    $match = $val instanceof TeamSpeak3_Helper_String ? $val->contains($rules[$key], true) : $val == $rules[$key];
 
                     if ($match === false) {
                         unset($nodes[$node->getId()]);

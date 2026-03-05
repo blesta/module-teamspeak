@@ -61,7 +61,7 @@ class TeamSpeak3_Adapter_ServerQuery_Event implements ArrayAccess
             throw new TeamSpeak3_Adapter_Exception('invalid notification event format');
         }
 
-        list($type, $data) = $evt->split(TeamSpeak3::SEPARATOR_CELL, 2);
+        [$type, $data] = $evt->split(TeamSpeak3::SEPARATOR_CELL, 2);
 
         if (empty($data)) {
             throw new TeamSpeak3_Adapter_Exception('invalid notification event data');
