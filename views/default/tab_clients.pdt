@@ -1,6 +1,6 @@
 <?php /** @var View $this **/ ?>
 
-<h6 class="form-section-header first"><?php $this->_('Teamspeak.tab_clients.heading_clients');?></h6>
+<h6 class="form-section-header first"><?php $this->_('Teamspeak.tab_clients.heading_clients'); ?></h6>
 <div class="pad">
     <table class="table">
         <thead>
@@ -12,39 +12,32 @@
         </thead>
         <tbody>
 
-            <?php
-
-                if (!empty($server_clients->clients)) {
-                    $i = 0;
-                    foreach ($server_clients->clients as $client) {
-                        ?>
+            <?php if (!empty($server_clients->clients)) {
+                $i = 0;
+                foreach ($server_clients->clients as $client) { ?>
             <tr>
-                <td><?php echo (isset($client->clid) ? $this->Html->safe($client->clid) : null); ?></td>
-                <td><?php echo (isset($client->name) ? $this->Html->safe($client->name) : null); ?></td>
+                <td><?php echo isset($client->clid) ? $this->Html->safe($client->clid) : null; ?></td>
+                <td><?php echo isset($client->name) ? $this->Html->safe($client->name) : null; ?></td>
                 <td>
                     <?php
-
-                                $this->Form->create();
-                            $this->Form->fieldHidden('action', 'kick_client');
-                            $this->Form->fieldHidden('clid', $client->clid); ?>
+                    $this->Form->create();
+                    $this->Form->fieldHidden('action', 'kick_client');
+                    $this->Form->fieldHidden('clid', $client->clid);
+                    ?>
                     <a href="#" class="submit manage">
                         <?php $this->_('Teamspeak.tab_clients.action_kick_client'); ?>
                     </a>
-                    <?php
-                                $this->Form->end(); ?>
+                    <?php $this->Form->end(); ?>
                 </td>
             </tr>
-                    <?php
-                        $i++;
-                    }
-                } else {
-                ?>
+                    <?php $i++;}
+            } else {
+                 ?>
             <tr>
                 <td colspan="3"><?php $this->_('Teamspeak.tab_clients.text_no_clients'); ?></td>
             </tr>
                     <?php
-                }
-                ?>
+            } ?>
         </tbody>
     </table>
 </div>

@@ -1,6 +1,6 @@
 <?php /** @var View $this **/ ?>
 
-<h6 class="form-section-header first"><?php $this->_('Teamspeak.tab_tokens.heading_tokens');?></h6>
+<h6 class="form-section-header first"><?php $this->_('Teamspeak.tab_tokens.heading_tokens'); ?></h6>
 <div class="pad">
     <table class="table">
         <thead>
@@ -13,73 +13,71 @@
         </thead>
         <tbody>
 
-            <?php
-
-                if (!empty($tokens->tokens)) {
-                    $i = 0;
-                    foreach ($tokens->tokens as $token) {
-                        $date = date('M d, Y', $token->token_created); ?>
+            <?php if (!empty($tokens->tokens)) {
+                $i = 0;
+                foreach ($tokens->tokens as $token) {
+                    $date = date('M d, Y', $token->token_created); ?>
             <tr>
-                <td><?php echo (isset($date) ? $this->Html->safe($date) : null); ?></td>
-                <td><?php echo (isset($token->token) ? $this->Html->safe($token->token) : null); ?></td>
-                <td><?php echo (isset($token->token_description) ? $this->Html->safe($token->token_description) : null); ?></td>
+                <td><?php echo isset($date) ? $this->Html->safe($date) : null; ?></td>
+                <td><?php echo isset($token->token) ? $this->Html->safe($token->token) : null; ?></td>
+                <td><?php echo isset($token->token_description)
+                    ? $this->Html->safe($token->token_description)
+                    : null; ?></td>
                 <td>
                     <?php
-
-                            $this->Form->create();
-                            $this->Form->fieldHidden('action', 'delete_token');
-                            $this->Form->fieldHidden('token', $token->token);
-                            ?>
+                    $this->Form->create();
+                    $this->Form->fieldHidden('action', 'delete_token');
+                    $this->Form->fieldHidden('token', $token->token);
+                    ?>
                     <a href="#" class="submit manage">
                         <?php $this->_('Teamspeak.tab_tokens.action_delete_token'); ?>
                     </a>
-                    <?php
-                            $this->Form->end();
-                            ?>
+                    <?php $this->Form->end(); ?>
                 </td>
             </tr>
-                    <?php
-                        $i++;
-                    }
-                } else {
-                ?>
+                    <?php $i++;
+                }
+            } else {
+                 ?>
             <tr>
                 <td colspan="4"><?php $this->_('Teamspeak.tab_tokens.text_no_tokens'); ?></td>
             </tr>
                     <?php
-                }
-                ?>
+            } ?>
         </tbody>
     </table>
 </div>
 
-<h6 class="form-section-header"><?php $this->_('Teamspeak.tab_tokens.heading_create_token');?></h6>
-                    <?php
-        $this->Form->create();
-    ?>
+<h6 class="form-section-header"><?php $this->_('Teamspeak.tab_tokens.heading_create_token'); ?></h6>
+                    <?php $this->Form->create(); ?>
 <div>
     <div class="mb-3">
     <?php
-
-                    $this->Form->label($this->_('Teamspeak.tab_tokens.field_sgid', true), 'sgid', ['class' => 'form-label']);
-                    $this->Form->fieldSelect('sgid', $server_groups_options, (isset($vars->sgid) ? $vars->sgid : null), ['id' => 'sgid', 'class' => 'form-select']);
-                ?>
+    $this->Form->label($this->_('Teamspeak.tab_tokens.field_sgid', true), 'sgid', ['class' => 'form-label']);
+    $this->Form->fieldSelect('sgid', $server_groups_options, isset($vars->sgid) ? $vars->sgid : null, [
+        'id' => 'sgid',
+        'class' => 'form-select',
+    ]);
+    ?>
     </div>
     <div class="mb-3">
     <?php
-
-                    $this->Form->label($this->_('Teamspeak.tab_tokens.field_description', true), 'description', ['class' => 'form-label']);
-                    $this->Form->fieldText('description', (isset($vars->token) ? $vars->token : null), ['id' => 'description', 'class' => 'form-control', 'placeholder' => $this->_('Teamspeak.tab_tokens.field_description', true)]);
-                    $this->Form->fieldHidden('action', 'create_token');
-                ?>
+    $this->Form->label($this->_('Teamspeak.tab_tokens.field_description', true), 'description', [
+        'class' => 'form-label',
+    ]);
+    $this->Form->fieldText('description', isset($vars->token) ? $vars->token : null, [
+        'id' => 'description',
+        'class' => 'form-control',
+        'placeholder' => $this->_('Teamspeak.tab_tokens.field_description', true),
+    ]);
+    $this->Form->fieldHidden('action', 'create_token');
+    ?>
     </div>
 </div>
 <div class="d-flex justify-content-end">
-    <?php
-
-            $this->Form->fieldSubmit('submit', $this->_('Teamspeak.tab_tokens.field_token_submit', true), ['class' => 'btn btn-primary']);
-        ?>
+    <?php $this->Form->fieldSubmit('submit', $this->_('Teamspeak.tab_tokens.field_token_submit', true), [
+        'class' => 'btn btn-primary',
+    ]); ?>
 </div>
-                    <?php
-        $this->Form->end();
-    ?>
+                    <?php $this->Form->end();
+?>

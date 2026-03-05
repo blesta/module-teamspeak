@@ -1,6 +1,6 @@
 <?php /** @var View $this **/ ?>
 
-<h6 class="form-section-header first"><?php $this->_('Teamspeak.tab_bans.heading_bans');?></h6>
+<h6 class="form-section-header first"><?php $this->_('Teamspeak.tab_bans.heading_bans'); ?></h6>
 <div class="pad">
     <table class="table">
         <thead>
@@ -14,73 +14,72 @@
         </thead>
         <tbody>
 
-            <?php
+            <?php if (!empty($server_bans->bans)) {
+                $i = 0;
+                foreach ($server_bans->bans as $ban) {
 
-                if (!empty($server_bans->bans)) {
-                    $i = 0;
-                    foreach ($server_bans->bans as $ban) {
-                        $date = date('M d, Y', $ban->created);
-                        $rule = !empty($ban->ip) ? $ban->ip : $ban->lastnickname; ?>
+                    $date = date('M d, Y', $ban->created);
+                    $rule = !empty($ban->ip) ? $ban->ip : $ban->lastnickname;
+                    ?>
             <tr>
-                <td><?php echo (isset($date) ? $this->Html->safe($date) : null); ?></td>
-                <td><?php echo (isset($ban->banid) ? $this->Html->safe($ban->banid) : null); ?></td>
-                <td><?php echo (isset($rule) ? $this->Html->safe($rule) : null); ?></td>
-                <td><?php echo (isset($ban->reason) ? $this->Html->safe($ban->reason) : null); ?></td>
+                <td><?php echo isset($date) ? $this->Html->safe($date) : null; ?></td>
+                <td><?php echo isset($ban->banid) ? $this->Html->safe($ban->banid) : null; ?></td>
+                <td><?php echo isset($rule) ? $this->Html->safe($rule) : null; ?></td>
+                <td><?php echo isset($ban->reason) ? $this->Html->safe($ban->reason) : null; ?></td>
                 <td>
                     <?php
-
-                            $this->Form->create();
-                            $this->Form->fieldHidden('action', 'unban_client');
-                            $this->Form->fieldHidden('banid', $ban->banid); ?>
+                    $this->Form->create();
+                    $this->Form->fieldHidden('action', 'unban_client');
+                    $this->Form->fieldHidden('banid', $ban->banid);
+                    ?>
                     <a href="#" class="submit">
                         <?php $this->_('Teamspeak.tab_bans.action_unban_client'); ?>
                     </a>
-                    <?php
-                            $this->Form->end(); ?>
+                    <?php $this->Form->end(); ?>
                 </td>
             </tr>
-                    <?php
-                        $i++;
-                    }
-                } else {
-                    ?>
+                    <?php $i++;
+                }
+            } else {
+                 ?>
             <tr>
                 <td colspan="5"><?php $this->_('Teamspeak.tab_bans.text_no_bans'); ?></td>
             </tr>
                     <?php
-                }
-                ?>
+            } ?>
         </tbody>
     </table>
 </div>
 
-<h6 class="form-section-header"><?php $this->_('Teamspeak.tab_bans.heading_create_ban');?></h6>
-                    <?php
-        $this->Form->create();
-    ?>
+<h6 class="form-section-header"><?php $this->_('Teamspeak.tab_bans.heading_create_ban'); ?></h6>
+                    <?php $this->Form->create(); ?>
 <div>
     <div class="mb-3">
     <?php
-
-                    $this->Form->label($this->_('Teamspeak.tab_bans.field_ip_address', true), 'ip_address', ['class' => 'form-label']);
-                    $this->Form->fieldText('ip_address', (isset($vars->ip_address) ? $vars->ip_address : null), ['id' => 'ip_address', 'class' => 'form-control', 'placeholder' => $this->_('Teamspeak.tab_bans.field_ip_address', true)]);
-                ?>
+    $this->Form->label($this->_('Teamspeak.tab_bans.field_ip_address', true), 'ip_address', ['class' => 'form-label']);
+    $this->Form->fieldText('ip_address', isset($vars->ip_address) ? $vars->ip_address : null, [
+        'id' => 'ip_address',
+        'class' => 'form-control',
+        'placeholder' => $this->_('Teamspeak.tab_bans.field_ip_address', true),
+    ]);
+    ?>
     </div>
     <div class="mb-3">
     <?php
-
-                    $this->Form->label($this->_('Teamspeak.tab_bans.field_reason', true), 'reason', ['class' => 'form-label']);
-                    $this->Form->fieldText('reason', (isset($vars->reason) ? $vars->reason : null), ['id' => 'reason', 'class' => 'form-control', 'placeholder' => $this->_('Teamspeak.tab_bans.field_reason', true)]);
-                    $this->Form->fieldHidden('action', 'create_ban');
-                ?>
+    $this->Form->label($this->_('Teamspeak.tab_bans.field_reason', true), 'reason', ['class' => 'form-label']);
+    $this->Form->fieldText('reason', isset($vars->reason) ? $vars->reason : null, [
+        'id' => 'reason',
+        'class' => 'form-control',
+        'placeholder' => $this->_('Teamspeak.tab_bans.field_reason', true),
+    ]);
+    $this->Form->fieldHidden('action', 'create_ban');
+    ?>
     </div>
 </div>
 <div class="d-flex justify-content-end">
-    <?php
-
-            $this->Form->fieldSubmit('submit', $this->_('Teamspeak.tab_bans.field_ban_submit', true), ['class' => 'btn btn-primary']);
-        ?>
+    <?php $this->Form->fieldSubmit('submit', $this->_('Teamspeak.tab_bans.field_ban_submit', true), [
+        'class' => 'btn btn-primary',
+    ]); ?>
 </div>
-                    <?php
-        $this->Form->end();
-        ?>
+                    <?php $this->Form->end();
+?>
