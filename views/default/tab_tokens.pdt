@@ -1,7 +1,7 @@
 <?php /** @var View $this **/ ?>
 
-<h6 class="form-section-header first"><?php $this->_('Teamspeak.tab_tokens.heading_tokens'); ?></h6>
-<div class="pad">
+<h6 class="form-section-header"><?php $this->_('Teamspeak.tab_tokens.heading_tokens'); ?></h6>
+<div class="mb-3">
     <table class="table">
         <thead>
             <tr>
@@ -49,7 +49,9 @@
 </div>
 
 <h6 class="form-section-header"><?php $this->_('Teamspeak.tab_tokens.heading_create_token'); ?></h6>
-                    <?php $this->Form->create(); ?>
+                    <?php
+$this->Form->create();
+?>
 <div>
     <div class="mb-3">
     <?php
@@ -76,8 +78,9 @@
 </div>
 <div class="d-flex justify-content-end">
     <?php $this->Form->fieldSubmit('submit', $this->_('Teamspeak.tab_tokens.field_token_submit', true), [
-        'class' => 'btn btn-primary',
+        'class' => 'btn btn-primary'
     ]); ?>
 </div>
-                    <?php $this->Form->end();
+                    <?php
+$this->Form->end();
 ?>

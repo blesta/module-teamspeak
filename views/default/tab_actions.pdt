@@ -1,7 +1,7 @@
 <?php /** @var View $this **/ ?>
 
-<h6 class="form-section-header first"><?php $this->_('Teamspeak.tab_actions.status_title'); ?></h6>
-<div class="pad">
+<h6 class="form-section-header"><?php $this->_('Teamspeak.tab_actions.status_title'); ?></h6>
+<div class="mb-3">
     <?php if ($server_info->state == 'online') {
         $status_class = 'success';
         $status = 'online';
@@ -20,7 +20,7 @@
 </div>
 
 <h6 class="form-section-header"><?php $this->_('Teamspeak.tab_actions.server_title'); ?></h6>
-<div class="pad">
+<div class="mb-3">
     <div class="row options">
         <div class="col-md-4">
             <?php
@@ -92,7 +92,9 @@
 
 <div id="change_name" style="display:none;">
     <h6 class="form-section-header"><?php $this->_('Teamspeak.tab_actions.heading_change_name'); ?></h6>
-    <?php $this->Form->create(); ?>
+    <?php
+$this->Form->create();
+?>
     <div>
         <div class="mb-3">
             <?php
