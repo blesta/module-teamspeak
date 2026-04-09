@@ -24,15 +24,17 @@
                     $this->Form->fieldHidden('action', 'kick_client');
                     $this->Form->fieldHidden('clid', $client->clid);
                     ?>
-                    <a href="#" class="submit manage">
-                        <?php $this->_('Teamspeak.tab_clients.action_kick_client'); ?>
-                    </a>
+                    <button type="submit" class="btn btn-sm btn-outline-danger"
+                        title="<?php $this->_('Teamspeak.tab_clients.action_kick_client'); ?>">
+                        <i class="bi bi-person-x"></i>
+                    </button>
                     <?php $this->Form->end(); ?>
                 </td>
             </tr>
-                    <?php $i++;}
+                    <?php $i++;
+                }
             } else {
-                 ?>
+                ?>
             <tr>
                 <td colspan="3"><?php $this->_('Teamspeak.tab_clients.text_no_clients'); ?></td>
             </tr>

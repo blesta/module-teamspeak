@@ -29,9 +29,10 @@
                     $this->Form->fieldHidden('action', 'delete_token');
                     $this->Form->fieldHidden('token', $token->token);
                     ?>
-                    <a href="#" class="submit manage">
-                        <?php $this->_('Teamspeak.tab_tokens.action_delete_token'); ?>
-                    </a>
+                    <button type="submit" class="btn btn-sm btn-outline-danger"
+                        title="<?php $this->_('Teamspeak.tab_tokens.action_delete_token'); ?>">
+                        <i class="bi bi-trash"></i>
+                    </button>
                     <?php $this->Form->end(); ?>
                 </td>
             </tr>

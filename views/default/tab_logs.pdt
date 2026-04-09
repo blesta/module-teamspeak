@@ -41,9 +41,10 @@
                 <td><?php echo isset($log->server_id) ? $this->Html->safe($log->server_id) : null; ?></td>
                 <td><?php echo isset($log->description) ? $this->Html->safe($log->description) : null; ?></td>
             </tr>
-                    <?php $i++;}
+                    <?php $i++;
+                }
             } else {
-                 ?>
+                ?>
             <tr>
                 <td colspan="5"><?php $this->_('Teamspeak.tab_logs.text_no_logs'); ?></td>
             </tr>

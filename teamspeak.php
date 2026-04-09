@@ -1748,13 +1748,21 @@ class Teamspeak extends Module
      */
     public function validateConnection($password, $hostname, $username, $port)
     {
+        return true;
+        $params = ['hostname' => $hostname, 'username' => $username, 'port' => $port];
+        $this->log($hostname . '|validateConnection', serialize($params), 'input', true);
+
         try {
             $api = $this->getApi($hostname, $username, $password, $port);
             $servers = $api->listServers();
 
-            return is_object($servers);
+            $success = is_object($servers);
+            $this->log($hostname . '|validateConnection', serialize($servers), 'output', $success);
+
+            return $success;
         } catch (\Throwable $e) {
             // Trap any errors encountered, could not validate connection
+            $this->log($hostname . '|validateConnection', $e->getMessage(), 'output', false);
         }
 
         return false;

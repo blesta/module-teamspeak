@@ -450,7 +450,7 @@ class TeamSpeak3_Helper_String implements ArrayAccess, Iterator, Countable
     public function toUtf8()
     {
         if (!$this->isUtf8()) {
-            $this->string = utf8_encode($this->string);
+            $this->string = mb_convert_encoding($this->string, 'UTF-8', 'ISO-8859-1');
         }
 
         return $this;
@@ -612,7 +612,7 @@ class TeamSpeak3_Helper_String implements ArrayAccess, Iterator, Countable
     /**
      * @ignore
      */
-    public function count()
+    public function count(): int
     {
         return strlen($this->string);
     }
@@ -620,7 +620,7 @@ class TeamSpeak3_Helper_String implements ArrayAccess, Iterator, Countable
     /**
      * @ignore
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->position = 0;
     }
@@ -628,7 +628,7 @@ class TeamSpeak3_Helper_String implements ArrayAccess, Iterator, Countable
     /**
      * @ignore
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->position < $this->count();
     }
@@ -636,7 +636,7 @@ class TeamSpeak3_Helper_String implements ArrayAccess, Iterator, Countable
     /**
      * @ignore
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->position;
     }
@@ -644,7 +644,7 @@ class TeamSpeak3_Helper_String implements ArrayAccess, Iterator, Countable
     /**
      * @ignore
      */
-    public function current()
+    public function current(): mixed
     {
         return new TeamSpeak3_Helper_Char($this->string[$this->position]);
     }
@@ -652,7 +652,7 @@ class TeamSpeak3_Helper_String implements ArrayAccess, Iterator, Countable
     /**
      * @ignore
      */
-    public function next()
+    public function next(): void
     {
         $this->position++;
     }
@@ -661,7 +661,7 @@ class TeamSpeak3_Helper_String implements ArrayAccess, Iterator, Countable
      * @ignore
      * @param mixed $offset
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return ($offset < strlen($this->string)) ? true : false;
     }
@@ -670,7 +670,7 @@ class TeamSpeak3_Helper_String implements ArrayAccess, Iterator, Countable
      * @ignore
      * @param mixed $offset
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return ($this->offsetExists($offset)) ? new TeamSpeak3_Helper_Char($this->string[$offset]) : null;
     }
@@ -680,7 +680,7 @@ class TeamSpeak3_Helper_String implements ArrayAccess, Iterator, Countable
      * @param mixed $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if (!$this->offsetExists($offset)) {
             return;
@@ -693,7 +693,7 @@ class TeamSpeak3_Helper_String implements ArrayAccess, Iterator, Countable
      * @ignore
      * @param mixed $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         if (!$this->offsetExists($offset)) {
             return;

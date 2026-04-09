@@ -9,9 +9,9 @@ $this->Widget->setLinkButtons([
         'attributes' => ['href' => $this->base_uri . 'settings/company/modules/manage/' . $module->id],
     ],
 ]);
+$this->Form->create(null, ['class' => 'disable-on-submit']);
 $this->Widget->create($this->_('Teamspeak.edit_row.box_title', true));
 
-$this->Form->create(null, ['class' => 'disable-on-submit']);
 $this->Form->fieldHidden('account_count', $vars->account_count ?? 0);
 ?>
 
@@ -58,9 +58,10 @@ $this->Form->fieldHidden('account_count', $vars->account_count ?? 0);
     <label for="password" class="form-label">
         <?php $this->_('Teamspeak.row_meta.password'); ?>
     </label>
-    <?php $this->Form->fieldPassword('password', $vars->password ?? null, [
+    <?php $this->Form->fieldPassword('password', [
         'id' => 'password',
         'class' => 'form-control',
+        'value' => $vars->password ?? null,
     ]); ?>
 </div>
 
@@ -87,8 +88,8 @@ $this->Form->fieldHidden('account_count', $vars->account_count ?? 0);
 </div>
 
 <?php
-$this->Form->end();
 $this->Widget->end();
+$this->Form->end();
 
 
 ?>
