@@ -1,21 +1,33 @@
-    <table class="table">
-        <tr class="heading_row">
-            <td class="fixed_small center border_none"><i class="fas fa-level-up-alt fa-rotate-90"></i></td>
-            <td class="border_left"><?php $this->_('Teamspeak.service_info.hostname'); ?></td>
-            <td class="last"><?php $this->_('Teamspeak.service_info.port'); ?></td>
+<?php /** @var View $this **/ ?>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th><i class="bi bi-arrow-up"></i></th>
+            <th><?php $this->_('Teamspeak.service_info.hostname'); ?></th>
+            <th><?php $this->_('Teamspeak.service_info.port'); ?></th>
         </tr>
+    </thead>
+    <tbody>
         <tr>
             <td></td>
-            <td><?php echo (isset($module_row->meta->hostname) ? $this->Html->safe($module_row->meta->hostname) : null); ?></td>
-            <td><?php echo (isset($service_fields->teamspeak_port) ? $this->Html->safe($service_fields->teamspeak_port) : null); ?></td>
+            <td><?php echo isset($module_row->meta->hostname)
+                ? $this->Html->safe($module_row->meta->hostname)
+                : null; ?></td>
+            <td><?php echo isset($service_fields->teamspeak_port)
+                ? $this->Html->safe($service_fields->teamspeak_port)
+                : null; ?></td>
         </tr>
-    </table>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#teamspeak_login<?php echo (isset($service->id) ? $this->Html->safe($service->id) : null);?>').click(function(e) {
-                e.preventDefault();
+    </tbody>
+</table>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('teamspeak_login<?php echo isset($service->id)
+            ? $this->Html->safe($service->id)
+            : null; ?>').addEventListener('click', function(e) {
+            e.preventDefault();
 
-                $(this).closest('form').submit();
-            });
+            this.closest('form').submit();
         });
-    </script>
+    });
+</script>

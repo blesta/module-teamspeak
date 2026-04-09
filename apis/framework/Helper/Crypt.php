@@ -73,7 +73,7 @@ class TeamSpeak3_Helper_Crypt
         $string .= str_repeat(chr(0), (8 - ($length % 8)) % 8);
 
         for ($i = 0; $i < $length; $i += 8) {
-            list(, $xl, $xr) = unpack('N2', substr($string, $i, 8));
+            [, $xl, $xr] = unpack('N2', substr($string, $i, 8));
             $this->encipher($xl, $xr);
             $encryp .= pack('N2', $xl, $xr);
         }
@@ -95,7 +95,7 @@ class TeamSpeak3_Helper_Crypt
         $string .= str_repeat(chr(0), (8 - ($length % 8)) % 8);
 
         for ($i = 0; $i < $length; $i += 8) {
-            list(, $xl, $xr) = unpack('N2', substr($string, $i, 8));
+            [, $xl, $xr] = unpack('N2', substr($string, $i, 8));
             $this->decipher($xl, $xr);
             $decryp .= pack('N2', $xl, $xr);
         }

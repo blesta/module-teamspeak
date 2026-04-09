@@ -257,7 +257,7 @@ class TeamSpeak3
                                          ' '  => '\\s',  // whitespace
                                          '|'  => '\\p',  // pipe
                                          ';'  => '\\;',  // semicolon
-                                         "\a" => '\\a',  // bell
+                                         '\a' => '\\a',  // bell
                                          "\b" => '\\b',  // backspace
                                          "\f" => '\\f',  // formfeed
                                          "\n" => '\\n',  // newline
@@ -462,7 +462,7 @@ class TeamSpeak3
             self::loadClass($class);
 
             return true;
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             return false;
         }
     }
@@ -520,11 +520,7 @@ class TeamSpeak3
 
         $output = preg_replace("/\]\=\>\n(\s+)/m", '] => ', ob_get_clean());
 
-        if (PHP_SAPI == 'cli') {
-            $output = PHP_EOL . PHP_EOL . $output . PHP_EOL;
-        } else {
-            $output = '<pre>' . htmlspecialchars($output, ENT_QUOTES, 'utf-8') . '</pre>';
-        }
+        $output = PHP_SAPI == 'cli' ? PHP_EOL . PHP_EOL . $output . PHP_EOL : '<pre>' . htmlspecialchars($output, ENT_QUOTES, 'utf-8') . '</pre>';
 
         if ($echo) {
             echo $output;

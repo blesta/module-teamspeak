@@ -76,7 +76,7 @@ class TeamSpeak3_Adapter_Update extends TeamSpeak3_Adapter_Abstract
 
         $this->getTransport()->send(TeamSpeak3_Helper_String::fromHex(33));
 
-        if (!preg_match_all("/,?(\d+)#([0-9a-zA-Z\._-]+),?/", $this->getTransport()->read(96), $matches) || !isset($matches[1]) || !isset($matches[2])) {
+        if (!preg_match_all('/,?(\d+)#([0-9a-zA-Z\._-]+),?/', $this->getTransport()->read(96), $matches) || !isset($matches[1]) || !isset($matches[2])) {
             throw new TeamSpeak3_Adapter_Update_Exception('invalid reply from the server');
         }
 
@@ -115,16 +115,16 @@ class TeamSpeak3_Adapter_Update extends TeamSpeak3_Adapter_Abstract
     {
         switch ($channel) {
             case 'stable':
-                return isset($this->build_datetimes[0]) ? $this->build_datetimes[0] : null;
+                return $this->build_datetimes[0] ?? null;
 
             case 'beta':
-                return isset($this->build_datetimes[1]) ? $this->build_datetimes[1] : null;
+                return $this->build_datetimes[1] ?? null;
 
             case 'alpha':
-                return isset($this->build_datetimes[2]) ? $this->build_datetimes[2] : null;
+                return $this->build_datetimes[2] ?? null;
 
             case 'server':
-                return isset($this->build_datetimes[3]) ? $this->build_datetimes[3] : null;
+                return $this->build_datetimes[3] ?? null;
 
             default:
                 throw new TeamSpeak3_Adapter_Update_Exception('invalid update channel identifier (' . $channel . ')');
@@ -147,16 +147,16 @@ class TeamSpeak3_Adapter_Update extends TeamSpeak3_Adapter_Abstract
     {
         switch ($channel) {
             case 'stable':
-                return isset($this->version_strings[0]) ? $this->version_strings[0] : null;
+                return $this->version_strings[0] ?? null;
 
             case 'beta':
-                return isset($this->version_strings[1]) ? $this->version_strings[1] : null;
+                return $this->version_strings[1] ?? null;
 
             case 'alpha':
-                return isset($this->version_strings[2]) ? $this->version_strings[2] : null;
+                return $this->version_strings[2] ?? null;
 
             case 'server':
-                return isset($this->version_strings[3]) ? $this->version_strings[3] : null;
+                return $this->version_strings[3] ?? null;
 
             default:
                 throw new TeamSpeak3_Adapter_Update_Exception('invalid update channel identifier (' . $channel . ')');

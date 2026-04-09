@@ -162,7 +162,7 @@ class TeamSpeak3_Adapter_ServerQuery_Reply
                 if (!$pair->contains(TeamSpeak3::SEPARATOR_PAIR)) {
                     $array[$i][$pair->toString()] = null;
                 } else {
-                    list($ident, $value) = $pair->split(TeamSpeak3::SEPARATOR_PAIR, 2);
+                    [$ident, $value] = $pair->split(TeamSpeak3::SEPARATOR_PAIR, 2);
 
                     $array[$i][$ident->toString()] = $value->isInt() ? $value->toInt() : (!func_num_args() ? $value->unescape() : $value);
                 }
@@ -273,7 +273,7 @@ class TeamSpeak3_Adapter_ServerQuery_Reply
         $cells = $err->section(TeamSpeak3::SEPARATOR_CELL, 1, 3);
 
         foreach ($cells->split(TeamSpeak3::SEPARATOR_CELL) as $pair) {
-            list($ident, $value) = $pair->split(TeamSpeak3::SEPARATOR_PAIR);
+            [$ident, $value] = $pair->split(TeamSpeak3::SEPARATOR_PAIR);
 
             $this->err[$ident->toString()] = $value->isInt() ? $value->toInt() : $value->unescape();
         }
@@ -282,11 +282,7 @@ class TeamSpeak3_Adapter_ServerQuery_Reply
 
         if ($this->getErrorProperty('id', 0x00) != 0x00 && $this->exp) {
             if ($permid = $this->getErrorProperty('failed_permid')) {
-                if ($permsid = key($this->con->request('permget permid=' . $permid, false)->toAssocArray('permsid'))) {
-                    $suffix = ' (failed on ' . $permsid . ')';
-                } else {
-                    $suffix = ' (failed on ' . $this->cmd->section(TeamSpeak3::SEPARATOR_CELL) . ' ' . $permid . '/0x' . strtoupper(dechex($permid)) . ')';
-                }
+                $suffix = $permsid = key($this->con->request('permget permid=' . $permid, false)->toAssocArray('permsid')) ? ' (failed on ' . $permsid . ')' : ' (failed on ' . $this->cmd->section(TeamSpeak3::SEPARATOR_CELL) . ' ' . $permid . '/0x' . strtoupper(dechex($permid)) . ')';
             } elseif ($details = $this->getErrorProperty('extra_msg')) {
                 $suffix = ' (' . trim($details) . ')';
             } else {

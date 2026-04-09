@@ -19,11 +19,15 @@ $lang['Teamspeak.tab_client_bans'] = 'Bans';
 $lang['Teamspeak.tab_client_tokens'] = 'Tokens';
 $lang['Teamspeak.tab_client_logs'] = 'Logs';
 
+$lang['Teamspeak.back_to_manage'] = 'Back';
+
 // Module management
 $lang['Teamspeak.add_module_row'] = 'Add Server';
 $lang['Teamspeak.add_module_group'] = 'Add Server Group';
 $lang['Teamspeak.manage.module_rows_title'] = 'Servers';
 $lang['Teamspeak.manage.module_groups_title'] = 'Server Groups';
+$lang['Teamspeak.manage.tab_rows'] = 'Servers';
+$lang['Teamspeak.manage.tab_groups'] = 'Server Groups';
 $lang['Teamspeak.manage.module_rows_heading.name'] = 'Server Label';
 $lang['Teamspeak.manage.module_rows_heading.hostname'] = 'Hostname';
 $lang['Teamspeak.manage.module_rows_heading.accounts'] = 'Accounts';

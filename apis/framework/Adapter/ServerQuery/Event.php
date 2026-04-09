@@ -61,7 +61,7 @@ class TeamSpeak3_Adapter_ServerQuery_Event implements ArrayAccess
             throw new TeamSpeak3_Adapter_Exception('invalid notification event format');
         }
 
-        list($type, $data) = $evt->split(TeamSpeak3::SEPARATOR_CELL, 2);
+        [$type, $data] = $evt->split(TeamSpeak3::SEPARATOR_CELL, 2);
 
         if (empty($data)) {
             throw new TeamSpeak3_Adapter_Exception('invalid notification event data');
@@ -112,7 +112,7 @@ class TeamSpeak3_Adapter_ServerQuery_Event implements ArrayAccess
      * @ignore
      * @param mixed $offset
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return array_key_exists($offset, $this->data) ? true : false;
     }
@@ -121,7 +121,7 @@ class TeamSpeak3_Adapter_ServerQuery_Event implements ArrayAccess
      * @ignore
      * @param mixed $offset
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         if (!$this->offsetExists($offset)) {
             throw new TeamSpeak3_Adapter_ServerQuery_Exception('invalid parameter', 0x602);
@@ -135,7 +135,7 @@ class TeamSpeak3_Adapter_ServerQuery_Event implements ArrayAccess
      * @param mixed $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         throw new TeamSpeak3_Node_Exception("event '" . $this->getType() . "' is read only");
     }
@@ -144,7 +144,7 @@ class TeamSpeak3_Adapter_ServerQuery_Event implements ArrayAccess
      * @ignore
      * @param mixed $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->data[$offset]);
     }

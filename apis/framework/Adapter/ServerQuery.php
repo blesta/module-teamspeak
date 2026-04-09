@@ -85,7 +85,7 @@ class TeamSpeak3_Adapter_ServerQuery extends TeamSpeak3_Adapter_Abstract
         if ($this->getTransport() instanceof TeamSpeak3_Transport_Abstract && $this->transport->isConnected()) {
             try {
                 $this->request('quit');
-            } catch (Exception $e) {
+            } catch (\Throwable $e) {
                 return;
             }
         }

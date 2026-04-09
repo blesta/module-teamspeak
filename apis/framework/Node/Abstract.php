@@ -221,11 +221,7 @@ abstract class TeamSpeak3_Node_Abstract implements RecursiveIterator, ArrayAcces
                 $props = array_intersect_key($props, $rules);
 
                 foreach ($props as $key => $val) {
-                    if ($val instanceof TeamSpeak3_Helper_String) {
-                        $match = $val->contains($rules[$key], true);
-                    } else {
-                        $match = $val == $rules[$key];
-                    }
+                    $match = $val instanceof TeamSpeak3_Helper_String ? $val->contains($rules[$key], true) : $val == $rules[$key];
 
                     if ($match === false) {
                         unset($nodes[$node->getId()]);
@@ -436,7 +432,7 @@ abstract class TeamSpeak3_Node_Abstract implements RecursiveIterator, ArrayAcces
     /**
      * @ignore
      */
-    public function count()
+    public function count(): int
     {
         $this->verifyNodeList();
 
@@ -446,7 +442,7 @@ abstract class TeamSpeak3_Node_Abstract implements RecursiveIterator, ArrayAcces
     /**
      * @ignore
      */
-    public function current()
+    public function current(): mixed
     {
         $this->verifyNodeList();
 
@@ -456,7 +452,7 @@ abstract class TeamSpeak3_Node_Abstract implements RecursiveIterator, ArrayAcces
     /**
      * @ignore
      */
-    public function getChildren()
+    public function getChildren(): ?RecursiveIterator
     {
         $this->verifyNodeList();
 
@@ -466,7 +462,7 @@ abstract class TeamSpeak3_Node_Abstract implements RecursiveIterator, ArrayAcces
     /**
      * @ignore
      */
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         $this->verifyNodeList();
 
@@ -486,7 +482,7 @@ abstract class TeamSpeak3_Node_Abstract implements RecursiveIterator, ArrayAcces
     /**
      * @ignore
      */
-    public function key()
+    public function key(): mixed
     {
         $this->verifyNodeList();
 
@@ -496,7 +492,7 @@ abstract class TeamSpeak3_Node_Abstract implements RecursiveIterator, ArrayAcces
     /**
      * @ignore
      */
-    public function valid()
+    public function valid(): bool
     {
         $this->verifyNodeList();
 
@@ -506,28 +502,28 @@ abstract class TeamSpeak3_Node_Abstract implements RecursiveIterator, ArrayAcces
     /**
      * @ignore
      */
-    public function next()
+    public function next(): void
     {
         $this->verifyNodeList();
 
-        return next($this->nodeList);
+        next($this->nodeList);
     }
 
     /**
      * @ignore
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->verifyNodeList();
 
-        return reset($this->nodeList);
+        reset($this->nodeList);
     }
 
     /**
      * @ignore
      * @param mixed $offset
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return array_key_exists((string) $offset, $this->nodeInfo) ? true : false;
     }
@@ -536,7 +532,7 @@ abstract class TeamSpeak3_Node_Abstract implements RecursiveIterator, ArrayAcces
      * @ignore
      * @param mixed $offset
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         if (!$this->offsetExists($offset)) {
             $this->fetchNodeInfo();
@@ -554,10 +550,11 @@ abstract class TeamSpeak3_Node_Abstract implements RecursiveIterator, ArrayAcces
      * @param mixed $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if (method_exists($this, 'modify')) {
-            return $this->modify([(string) $offset => $value]);
+            $this->modify([(string) $offset => $value]);
+            return;
         }
 
         throw new TeamSpeak3_Node_Exception("node '" . get_class($this) . "' is read only");
@@ -567,7 +564,7 @@ abstract class TeamSpeak3_Node_Abstract implements RecursiveIterator, ArrayAcces
      * @ignore
      * @param mixed $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->nodeInfo[(string) $offset]);
     }

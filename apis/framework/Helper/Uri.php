@@ -101,20 +101,20 @@ class TeamSpeak3_Helper_Uri
         $uri = explode(':', (string) $uri, 2);
 
         $this->scheme = strtolower($uri[0]);
-        $uriString    = isset($uri[1]) ? $uri[1] : '';
+        $uriString    = $uri[1] ?? '';
 
         if (!ctype_alnum($this->scheme)) {
             throw new TeamSpeak3_Helper_Exception("invalid URI scheme '" . $this->scheme . "' supplied");
         }
 
         /* grammar rules for validation */
-        $this->regex['alphanum']   = "[^\W_]";
-        $this->regex['escaped']    = "(?:%[\da-fA-F]{2})";
+        $this->regex['alphanum']   = '[^\W_]';
+        $this->regex['escaped']    = '(?:%[\da-fA-F]{2})';
         $this->regex['mark']       = "[-_.!~*'()\[\]]";
-        $this->regex['reserved']   = "[;\/?:@&=+$,]";
+        $this->regex['reserved']   = '[;\/?:@&=+$,]';
         $this->regex['unreserved'] = '(?:' . $this->regex['alphanum'] . '|' . $this->regex['mark'] . ')';
         $this->regex['segment']    = '(?:(?:' . $this->regex['unreserved'] . '|' . $this->regex['escaped'] . '|[:@&=+$,;])*)';
-        $this->regex['path']       = "(?:\/" . $this->regex['segment'] . '?)+';
+        $this->regex['path']       = '(?:\/' . $this->regex['segment'] . '?)+';
         $this->regex['uric']       = '(?:' . $this->regex['reserved'] . '|' . $this->regex['unreserved'] . '|' . $this->regex['escaped'] . ')';
 
         if (strlen($uriString) > 0) {
@@ -135,7 +135,7 @@ class TeamSpeak3_Helper_Uri
      */
     protected function parseUri($uriString = '')
     {
-        $status = @preg_match("~^((//)([^/?#]*))([^?#]*)(\?([^#]*))?(#(.*))?$~", $uriString, $matches);
+        $status = @preg_match('~^((//)([^/?#]*))([^?#]*)(\?([^#]*))?(#(.*))?$~', $uriString, $matches);
 
         if ($status === false) {
             throw new TeamSpeak3_Helper_Exception('URI scheme-specific decomposition failed');
@@ -159,10 +159,10 @@ class TeamSpeak3_Helper_Uri
             return;
         }
 
-        $this->user = isset($matches[2]) ? $matches[2] : '';
-        $this->pass = isset($matches[4]) ? $matches[4] : '';
+        $this->user = $matches[2] ?? '';
+        $this->pass = $matches[4] ?? '';
         $this->host = isset($matches[5]) === true ? preg_replace('~^\[([^]]+)\]$~', '\1', $matches[5]) : '';
-        $this->port = isset($matches[7]) ? $matches[7] : '';
+        $this->port = $matches[7] ?? '';
     }
 
     /**
@@ -185,7 +185,7 @@ class TeamSpeak3_Helper_Uri
     {
         try {
             $uri = new self((string) $uri);
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             return false;
         }
 
@@ -630,7 +630,7 @@ class TeamSpeak3_Helper_Uri
      */
     public static function getFQDNParts($hostname)
     {
-        if (!preg_match("/^([a-z0-9][a-z0-9-]{0,62}\.)*([a-z0-9][a-z0-9-]{0,62}\.)+([a-z]{2,6})$/i", $hostname, $matches)) {
+        if (!preg_match('/^([a-z0-9][a-z0-9-]{0,62}\.)*([a-z0-9][a-z0-9-]{0,62}\.)+([a-z]{2,6})$/i', $hostname, $matches)) {
             return [];
         }
 
