@@ -1748,7 +1748,6 @@ class Teamspeak extends Module
      */
     public function validateConnection($password, $hostname, $username, $port)
     {
-        return true;
         $params = ['hostname' => $hostname, 'username' => $username, 'port' => $port];
         $this->log($hostname . '|validateConnection', serialize($params), 'input', true);
 
