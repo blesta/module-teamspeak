@@ -35,5 +35,8 @@
             "teamspeak_port"
         ]
     },
-    "icon": "bi-headset"
+    "logo": {
+        "light": "views/default/images/logo.svg",
+        "dark": "views/default/images/logo-dark.svg"
+    }
 }
